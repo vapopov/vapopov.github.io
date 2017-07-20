@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on Vadym Popov personal page</title>
+    <link>/tags/test/</link>
+    <description>Recent content in Test on Vadym Popov personal page</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
+    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>2017 (c)</copyright>
+    <lastBuildDate>Thu, 20 Jul 2017 00:47:34 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Welcome</title>
+      <link>/2017/07/20/welcome/</link>
+      <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/07/20/welcome/</guid>
+      <description>To start consuming experience and don&amp;rsquo;t keep everything in mind, everything will be dumped here</description>
+    </item>
+    
+  </channel>
+</rss>

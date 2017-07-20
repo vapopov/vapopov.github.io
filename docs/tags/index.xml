@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Vadym Popov&#39;s</title>
-    <link>http://vpopov.org/tags/</link>
-    <description>Recent content in Tags on Vadym Popov&#39;s</description>
+    <title>Tags on Vadym Popov personal page</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Vadym Popov personal page</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
+    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>2017 (c)</copyright>
     
-	<atom:link href="http://vpopov.org/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Test</title>
+      <link>/tags/test/</link>
+      <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Welcome</title>
+      <link>/tags/welcome/</link>
+      <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/welcome/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

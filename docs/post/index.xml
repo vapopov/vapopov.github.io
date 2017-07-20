@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Vadym Popov&#39;s</title>
-    <link>http://vpopov.org/post/</link>
-    <description>Recent content in Posts on Vadym Popov&#39;s</description>
+    <title>Posts on Vadym Popov personal page</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Vadym Popov personal page</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
+    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>2017 (c)</copyright>
     <lastBuildDate>Thu, 20 Jul 2017 00:47:34 +0200</lastBuildDate>
     
-	<atom:link href="http://vpopov.org/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Welcome</title>
-      <link>http://vpopov.org/post/welcome/</link>
+      <link>/2017/07/20/welcome/</link>
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
-      
-      <guid>http://vpopov.org/post/welcome/</guid>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/07/20/welcome/</guid>
       <description>To start consuming experience and don&amp;rsquo;t keep everything in mind, everything will be dumped here</description>
     </item>
     
