@@ -27,7 +27,7 @@ paginate = 10
 paginatePath = "page"
 
 # Enable Disqus integration
-disqusShortname = "your_disqus_shortname"
+disqusShortname = "vpopov"
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
@@ -50,7 +50,7 @@ disqusShortname = "your_disqus_shortname"
 # slate, spacelab, superhero, united, yeti.
 
 [params.theme]
-  name = "superhero"
+  name = "cosmo"
 
 [params.popover]
   # This is a highly configurable popover form.
@@ -58,7 +58,7 @@ disqusShortname = "your_disqus_shortname"
   posturl = "https://zapier.com/hooks/..."
   headerimage = " "
   expirecookie = 5 #show it again after number of days to visitor that has not subscribed.
-  cookiename = "mycookie1" #give the cookie a unique name variable (avoid spaces and strange characters).
+  cookiename = "zion" #give the cookie a unique name variable (avoid spaces and strange characters).
   signupheader = "Join Our Newsletter"
   showmodaltimeout = 10000 #show popover modal after time interval in milliseconds.
   mouseleave = true #show popover when mouse leaves window: true/false.
@@ -99,7 +99,7 @@ disqusShortname = "your_disqus_shortname"
     highlight = "default"
 
     # Google Analytics.
-    googleAnalytics = "Your Google Analytics tracking code"
+    googleAnalytics = "UA-103006315-1"
 
     # Sidebar social links.
     github = "vapopov" # Your Github profile ID
@@ -159,7 +159,7 @@ disqusShortname = "your_disqus_shortname"
     name = "Dashboard"
     identifier = ""
     weight = 3
-    url = "https://vpopov.org/"
+    url = "/"
 
     [[Languages.en.menu.footer]] # add  links to the bottom right corner.
     name = "Disclaimer"

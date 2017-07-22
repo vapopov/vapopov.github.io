@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rsync on Vadym Popov personal page</title>
+    <link>/tags/rsync/</link>
+    <description>Recent content in Rsync on Vadym Popov personal page</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
+    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>2017 (c)</copyright>
+    <lastBuildDate>Fri, 21 Jul 2017 07:35:01 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/rsync/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Base usefull commands</title>
+      <link>/2017/07/21/base-usefull-commands/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/07/21/base-usefull-commands/</guid>
+      <description>Base commands {% highlight bash %} redis-cli -h dev-1.aws.bkstg.com EVAL &amp;laquo;local keys = redis.call(&amp;lsquo;keys&amp;rsquo;, ARGV[1]) for i=1,#keys,5000 do redis.call(&amp;lsquo;del&amp;rsquo;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;raquo; 0 gamification:*
+redis-cli -h bkstg-redis-2.rduahv.0001.usw2.cache.amazonaws.com EVAL &amp;laquo; local ttls = {} for i, name in ipairs(redis.call(&amp;lsquo;KEYS&amp;rsquo;, ARGV[1])) do ttls[i] = {redis.call(&amp;lsquo;ttl&amp;rsquo;, name), name}; end return ttls&amp;raquo; 0 PermissionsFlagger
+{% endhighlight %}
+Create and transfer archive direcly to the romote host {% highlight bash %} $ tar -zc .</description>
+    </item>
+    
+  </channel>
+</rss>
