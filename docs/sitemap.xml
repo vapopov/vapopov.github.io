@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/2017/07/21/server-optimisation-for-nginx/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/07/20/welcome/</loc>
     <lastmod>2017-07-20T00:47:34+02:00</lastmod>
   </url>
@@ -18,22 +23,19 @@
   </url>
   
   <url>
-    <loc>/2015/04/27/base-docker-workflow-commands/</loc>
-    <lastmod>2015-04-27T18:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2015/04/27/base-docker-workflow-commands/</loc>
-    <lastmod>2015-04-27T18:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2015/03/17/server-optimisation-for-nginx/</loc>
-    <lastmod>2015-03-17T07:35:01+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/bash/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/nginx/</loc>
     <lastmod>2017-07-21T07:35:01+02:00</lastmod>
     <priority>0</priority>
   </url>
@@ -45,7 +47,19 @@
   </url>
   
   <url>
+    <loc>/tags/redis/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/rsync/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/sysctl/</loc>
     <lastmod>2017-07-21T07:35:01+02:00</lastmod>
     <priority>0</priority>
   </url>

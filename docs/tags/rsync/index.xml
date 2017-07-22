@@ -20,10 +20,9 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/21/base-usefull-commands/</guid>
-      <description>Base commands {% highlight bash %} redis-cli -h dev-1.aws.bkstg.com EVAL &amp;laquo;local keys = redis.call(&amp;lsquo;keys&amp;rsquo;, ARGV[1]) for i=1,#keys,5000 do redis.call(&amp;lsquo;del&amp;rsquo;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;raquo; 0 gamification:*
-redis-cli -h bkstg-redis-2.rduahv.0001.usw2.cache.amazonaws.com EVAL &amp;laquo; local ttls = {} for i, name in ipairs(redis.call(&amp;lsquo;KEYS&amp;rsquo;, ARGV[1])) do ttls[i] = {redis.call(&amp;lsquo;ttl&amp;rsquo;, name), name}; end return ttls&amp;raquo; 0 PermissionsFlagger
-{% endhighlight %}
-Create and transfer archive direcly to the romote host {% highlight bash %} $ tar -zc .</description>
+      <description>Redis multi actions Remove values by pattern
+redis-cli -h dev-1.example.com EVAL &amp;quot;local keys = redis.call(&#39;keys&#39;, ARGV[1]) for i=1,#keys,5000 do redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;quot; 0 pattern:*  Check TTL by pattern
+redis-cli -h dev-1.example.com EVAL &amp;quot; local ttls = {} for i, name in ipairs(redis.call(&#39;KEYS&#39;, ARGV[1])) do ttls[i] = {redis.call(&#39;ttl&#39;, name), name}; end return ttls&amp;quot; 0 *pattern*  Rsync Create and transfer archive directly to the remote host $ tar -zc .</description>
     </item>
     
   </channel>

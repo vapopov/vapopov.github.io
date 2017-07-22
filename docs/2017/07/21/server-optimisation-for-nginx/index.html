@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Vadym Popov personal page </title>
+  <title>Server optimisation for nginx  &middot; Vadym Popov personal page</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -14,22 +14,37 @@
 
 <meta name="description" content="" />
 
-<meta name="keywords" content="">
+<meta name="keywords" content="sysctl, nginx, linux, ">
 
 
-<meta property="og:title" content="Vadym Popov personal page ">
+<meta property="og:title" content="Server optimisation for nginx  &middot; Vadym Popov personal page ">
 <meta property="og:site_name" content="Vadym Popov personal page"/>
-<meta property="og:url" content="/" />
+<meta property="og:url" content="/2017/07/21/server-optimisation-for-nginx/" />
 <meta property="og:locale" content="en">
 
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2017-07-21T07:35:01&#43;02:00" />
+<meta property="og:article:modified_time" content="2017-07-21T07:35:01&#43;02:00" />
+
+  
+    
+<meta property="og:article:tag" content="sysctl">
+    
+<meta property="og:article:tag" content="nginx">
+    
+<meta property="og:article:tag" content="linux">
+    
+  
+
+  
+
+  
 
 
 
-<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Vadym Popov personal page" />
-
-<link rel="canonical" href="/" />
+<link rel="canonical" href="/2017/07/21/server-optimisation-for-nginx/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
 <link rel="icon" href="/favicon.png">
 <meta name="generator" content="Hugo 0.25.1" />
@@ -92,7 +107,7 @@
               </a>
             </li>
             
-            <li class="active">
+            <li class="">
 
               <a href="/" >
                 
@@ -118,70 +133,48 @@
   </header>
 
 
-  <div class="container">
-    
-    <div class="row">
-      <div class="col-sm-9">
-        
-        
-          <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div>
-  <h2><a href="/2017/07/21/base-usefull-commands/">Base usefull commands</a>
-</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="text-center">
 
-  <div class="margin-10">
-    <small>
+    <h1>Server optimisation for nginx
+</h1>
+
+    <div class="metas">
+<small>
   <i class="fa fa-calendar"></i>
   <time datetime="2017-07-21">21 Jul, 2017</time>
 </small>
 
-    
-  <i class="fa fa-tags"></i>
-  
-  <a href="/tags/bash" class="label label-primary">bash</a>
-  
-  <a href="/tags/rsync" class="label label-primary">rsync</a>
-  
-  <a href="/tags/redis" class="label label-primary">redis</a>
-  
 
+  <small>
+  &middot; Read in about 1 min
+  &middot; (51 words)
+  &middot; 
+<span class="share-box">Share this on:
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-facebook-official "></i></a>
 
-  </div>
-</div>
+    <a href="https://twitter.com/intent/tweet?text=Server%20optimisation%20for%20nginx&amp;url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter"></i></a>
 
-    <p>
-  
-  
-    Redis multi actions Remove values by pattern
-redis-cli -h dev-1.example.com EVAL &quot;local keys = redis.call('keys', ARGV[1]) for i=1,#keys,5000 do redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) end return keys&quot; 0 pattern:*  Check TTL by pattern
-redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs(redis.call('KEYS', ARGV[1])) do ttls[i] = {redis.call('ttl', name), name}; end return ttls&quot; 0 *pattern*  Rsync Create and transfer archive directly to the remote host $ tar -zc .
-  
+    <a href="https://plus.google.com/share?url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-google-plus"></i></a>
 
+    <a href="http://www.reddit.com/submit?url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-reddit"></i></a>
 
-</p>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f&amp;title=Server%20optimisation%20for%20nginx" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-linkedin"></i></a>
 
+    <a href="mailto:?subject=Server%20optimisation%20for%20nginx&amp;body=Check out this site %2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" data-proofer-ignore=""><i class="fa fa-envelope"></i></a>
+  </span>
 
-    <p class="lead"><a href="/2017/07/21/base-usefull-commands/" class="btn btn-default">Read more &rarr;</a></p>
+  </small>
 
-
-  </div>
-</div>
-
-        
-          <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div>
-  <h2><a href="/2017/07/21/server-optimisation-for-nginx/">Server optimisation for nginx</a>
-</h2>
-
-  <div class="margin-10">
-    <small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2017-07-21">21 Jul, 2017</time>
-</small>
-
-    
+<div class="margin-10">
   <i class="fa fa-tags"></i>
   
   <a href="/tags/sysctl" class="label label-primary">sysctl</a>
@@ -192,73 +185,121 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
   
 
 
-  </div>
 </div>
 
-    <p>
-  
-  
-     Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &quot;10152 65535&quot; &gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240  
-  
-
-
-</p>
-
-
-    <p class="lead"><a href="/2017/07/21/server-optimisation-for-nginx/" class="btn btn-default">Read more &rarr;</a></p>
-
+<br>
+</div>
 
   </div>
 </div>
 
-        
-          <div class="row">
+      <div class="content">
+  
+
+<h1 id="optimisation-to-use-nginx-node">Optimisation to use nginx node</h1>
+
+<h3 id="use-the-full-range-of-ports">Use the full range of ports.</h3>
+
+<pre><code class="language-config">net.ipv4.ip_local_port_range = 1024 65535
+net.ipv4.tcp_max_syn_backlog=4096
+net.core.netdev_max_backlog=4096
+net.core.somaxconn=1024
+
+
+net.ipv4.tcp_keepalive_time=300
+net.core.somaxconn=250000
+net.ipv4.tcp_max_syn_backlog=2500
+net.core.netdev_max_backlog=2500
+net.ipv4.tcp_tw_reuse = 1
+</code></pre>
+
+<h3 id="bash-resource-initialisation">Bash resource initialisation</h3>
+
+<pre><code class="language-bash">echo &quot;10152 65535&quot; &gt; /proc/sys/net/ipv4/ip_local_port_range
+sysctl -w fs.file-max=128000
+sysctl -w net.ipv4.tcp_keepalive_time=300
+sysctl -w net.core.somaxconn=250000
+sysctl -w net.ipv4.tcp_max_syn_backlog=2500
+sysctl -w net.core.netdev_max_backlog=2500
+
+ulimit -n 10240 
+</code></pre>
+
+</div>
+
+
+      <footer>
+  
+<span class="share-box">Share this on:
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-facebook-official "></i></a>
+
+    <a href="https://twitter.com/intent/tweet?text=Server%20optimisation%20for%20nginx&amp;url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter"></i></a>
+
+    <a href="https://plus.google.com/share?url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-google-plus"></i></a>
+
+    <a href="http://www.reddit.com/submit?url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-reddit"></i></a>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f&amp;title=Server%20optimisation%20for%20nginx" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-linkedin"></i></a>
+
+    <a href="mailto:?subject=Server%20optimisation%20for%20nginx&amp;body=Check out this site %2f2017%2f07%2f21%2fserver-optimisation-for-nginx%2f" data-proofer-ignore=""><i class="fa fa-envelope"></i></a>
+  </span>
+
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div>
-  <h2><a href="/2017/07/20/welcome/">Welcome</a>
-</h2>
-
-  <div class="margin-10">
-    <small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2017-07-20">20 Jul, 2017</time>
-</small>
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="/2017/07/20/welcome/" title="Welcome">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
 
     
-  <i class="fa fa-tags"></i>
-  
-  <a href="/tags/test" class="label label-primary">test</a>
-  
-  <a href="/tags/welcome" class="label label-primary">welcome</a>
+      <li class="next">
+        <a href="/2017/07/21/base-usefull-commands/" title="Base usefull commands">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
   
 
 
-  </div>
 </div>
 
-    <p>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   
-  
-    To start consuming experience and don&rsquo;t keep everything in mind, everything will be dumped here
-  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//vpopov.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
-</p>
-
-
-    <p class="lead"><a href="/2017/07/20/welcome/" class="btn btn-default">Read more &rarr;</a></p>
-
-
-  </div>
 </div>
 
-        
-        
+</footer>
 
-      </div>
-      
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <div>
+    </div>
+    
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div>
   
 
     <div class="section">
@@ -302,12 +343,10 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
 
 </div>
 
-        </div>
-      
-    </div>
-
+      </div>
+    
   </div>
-
+</div>
     
 <footer class="footer hidden-print">
   <div class="container">

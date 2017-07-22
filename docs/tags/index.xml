@@ -24,11 +24,47 @@
     </item>
     
     <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Redis</title>
+      <link>/tags/redis/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rsync</title>
       <link>/tags/rsync/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/tags/rsync/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sysctl</title>
+      <link>/tags/sysctl/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/sysctl/</guid>
       <description></description>
     </item>
     

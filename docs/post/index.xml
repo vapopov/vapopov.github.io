@@ -20,10 +20,18 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/21/base-usefull-commands/</guid>
-      <description>Base commands {% highlight bash %} redis-cli -h dev-1.aws.bkstg.com EVAL &amp;laquo;local keys = redis.call(&amp;lsquo;keys&amp;rsquo;, ARGV[1]) for i=1,#keys,5000 do redis.call(&amp;lsquo;del&amp;rsquo;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;raquo; 0 gamification:*
-redis-cli -h bkstg-redis-2.rduahv.0001.usw2.cache.amazonaws.com EVAL &amp;laquo; local ttls = {} for i, name in ipairs(redis.call(&amp;lsquo;KEYS&amp;rsquo;, ARGV[1])) do ttls[i] = {redis.call(&amp;lsquo;ttl&amp;rsquo;, name), name}; end return ttls&amp;raquo; 0 PermissionsFlagger
-{% endhighlight %}
-Create and transfer archive direcly to the romote host {% highlight bash %} $ tar -zc .</description>
+      <description>Redis multi actions Remove values by pattern
+redis-cli -h dev-1.example.com EVAL &amp;quot;local keys = redis.call(&#39;keys&#39;, ARGV[1]) for i=1,#keys,5000 do redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;quot; 0 pattern:*  Check TTL by pattern
+redis-cli -h dev-1.example.com EVAL &amp;quot; local ttls = {} for i, name in ipairs(redis.call(&#39;KEYS&#39;, ARGV[1])) do ttls[i] = {redis.call(&#39;ttl&#39;, name), name}; end return ttls&amp;quot; 0 *pattern*  Rsync Create and transfer archive directly to the remote host $ tar -zc .</description>
+    </item>
+    
+    <item>
+      <title>Server optimisation for nginx</title>
+      <link>/2017/07/21/server-optimisation-for-nginx/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/07/21/server-optimisation-for-nginx/</guid>
+      <description> Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &amp;quot;10152 65535&amp;quot; &amp;gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240  </description>
     </item>
     
     <item>
@@ -33,43 +41,6 @@ Create and transfer archive direcly to the romote host {% highlight bash %} $ ta
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/20/welcome/</guid>
       <description>To start consuming experience and don&amp;rsquo;t keep everything in mind, everything will be dumped here</description>
-    </item>
-    
-    <item>
-      <title>Base Docker workflow commands</title>
-      <link>/2015/04/27/base-docker-workflow-commands/</link>
-      <pubDate>Mon, 27 Apr 2015 18:00:00 +0000</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2015/04/27/base-docker-workflow-commands/</guid>
-      <description>Setup Elasticsearch to YARN cluster [hadoop@ip-172-31-33-1 ~]$ hadoop jar elasticsearch-yarn-2.4.2.jar -install Uploaded /home/hadoop/elasticsearch-yarn-2.4.2.jar to HDFS at hdfs://ip-172-31-33-1.us-west-2.compute.internal:8020/apps/elasticsearch/elasticsearch-yarn-2.4.2.jar
-Setup Kubernetes cluster with fleet [network] http://www.dasblinkenlichten.com/kubernetes-101-networking/ [Services in Kubernetes] https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/services.md
-Labels &amp;laquo;release&amp;raquo; : &amp;laquo;stable&amp;raquo;, &amp;laquo;release&amp;raquo; : &amp;laquo;canary&amp;raquo;, &amp;hellip; &amp;laquo;environment&amp;raquo; : &amp;laquo;dev&amp;raquo;, &amp;laquo;environment&amp;raquo; : &amp;laquo;qa&amp;raquo;, &amp;laquo;environment&amp;raquo; : &amp;laquo;production&amp;raquo; &amp;laquo;tier&amp;raquo; : &amp;laquo;frontend&amp;raquo;, &amp;laquo;tier&amp;raquo; : &amp;laquo;backend&amp;raquo;, &amp;laquo;tier&amp;raquo; : &amp;laquo;middleware&amp;raquo; &amp;laquo;partition&amp;raquo; : &amp;laquo;customerA&amp;raquo;, &amp;laquo;partition&amp;raquo; : &amp;laquo;customerB&amp;raquo;, &amp;hellip; &amp;laquo;track&amp;raquo; : &amp;laquo;daily&amp;raquo;, &amp;laquo;track&amp;raquo; : &amp;laquo;weekly&amp;raquo;</description>
-    </item>
-    
-    <item>
-      <title>Base Docker workflow commands</title>
-      <link>/2015/04/27/base-docker-workflow-commands/</link>
-      <pubDate>Mon, 27 Apr 2015 18:00:00 +0000</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2015/04/27/base-docker-workflow-commands/</guid>
-      <description>Start application node with default links to postgres and redis Linked containers will resolve as defined hosts after &amp;laquo;:&amp;raquo; separation
-{% highlight bash %} docker run -it &amp;ndash;name frontend-api-backend &amp;ndash;link fahlo-postgres:postgres &amp;ndash;link fahlo-redis:redis -v /Users/zion/Projects/fahlo-src/backend_api:/opt/app -v /Users/zion/Projects/fahlo-src/backend_website:/opt/backend_website -p 80:80 -p 9000:9000 fahlo-app /bin/bash {% endhighlight %}
-{% highlight bash %} sudo docker run &amp;ndash;volume=/:/rootfs:ro &amp;ndash;volume=/var/run:/var/run:rw &amp;ndash;volume=/sys:/sys:ro &amp;ndash;volume=/var/lib/docker/:/var/lib/docker:ro &amp;ndash;publish=8088:8080 &amp;ndash;detach=true &amp;ndash;name=cadvisor google/cadvisor:latest {% endhighlight %}
-Setup Kubernetes cluster with fleet [network] http://www.</description>
-    </item>
-    
-    <item>
-      <title>Server optimisation for nginx</title>
-      <link>/2015/03/17/server-optimisation-for-nginx/</link>
-      <pubDate>Tue, 17 Mar 2015 07:35:01 +0000</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2015/03/17/server-optimisation-for-nginx/</guid>
-      <description>Optimisation to use nginx node Use the full range of ports. {% highlight config %} net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024
-net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1 {% endhighlight %}
-echo &amp;laquo;10152 65535&amp;raquo; &amp;gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500
-ulimit -n 10240
-aws lambda add-permission &amp;ndash;function-name &amp;laquo;asg_route53_updater&amp;raquo; &amp;ndash;action lambda:invokeFunction &amp;ndash;principal sns.amazonaws.com &amp;ndash;source-arn &amp;laquo;arn:aws:sns:us-west-2:240020657974:asg_route_notifications&amp;raquo; &amp;ndash;statement-id $(uuidgen)
-Subscribe the AWS Lambda function to the SNS Topic aws sns subscribe &amp;ndash;topic-arn &amp;laquo;arn:aws:sns:us-west-2:240020657974:asg_route_notifications&amp;raquo; &amp;ndash;protocol lambda &amp;ndash;notification-endpoint &amp;laquo;arn:aws:lambda:us-west-2:240020657974:function:asg_route53_updater&amp;raquo;</description>
     </item>
     
   </channel>
