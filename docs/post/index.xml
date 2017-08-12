@@ -9,10 +9,29 @@
     <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
     <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
     <copyright>2017 (c)</copyright>
-    <lastBuildDate>Fri, 21 Jul 2017 07:35:01 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2017 08 12 Git Gpg Verification</title>
+      <link>/2017/08/12/2017-08-12-git-gpg-verification/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/08/12/2017-08-12-git-gpg-verification/</guid>
+      <description>GPG and git on macOS Setup No need for homebrew or anything like that. Works with https://www.git-tower.com and the command line.
+ Install https://gpgtools.org &amp;ndash; I&amp;rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &amp;ndash; see below for https://keybase.io Run gpg --list-secret-keys and look for sec, use the key ID for the next step Configure git to use GPG &amp;ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.</description>
+    </item>
+    
+    <item>
+      <title>2017 08 12 Query Planner</title>
+      <link>/2017/08/12/2017-08-12-query-planner/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/08/12/2017-08-12-query-planner/</guid>
+      <description>Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&amp;rsquo;t have to go to disk.</description>
+    </item>
     
     <item>
       <title>Base usefull commands</title>

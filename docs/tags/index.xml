@@ -24,6 +24,24 @@
     </item>
     
     <item>
+      <title>Git</title>
+      <link>/tags/git/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gpg</title>
+      <link>/tags/gpg/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/gpg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Linux</title>
       <link>/tags/linux/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
@@ -42,6 +60,15 @@
     </item>
     
     <item>
+      <title>Pg</title>
+      <link>/tags/pg/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/pg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Redis</title>
       <link>/tags/redis/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
@@ -56,6 +83,15 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/tags/rsync/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sql</title>
+      <link>/tags/sql/</link>
+      <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/tags/sql/</guid>
       <description></description>
     </item>
     

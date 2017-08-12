@@ -127,6 +127,89 @@
           <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="/2017/08/12/2017-08-12-git-gpg-verification/">2017 08 12 Git Gpg Verification</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2017-08-12">12 Aug, 2017</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="/tags/git" class="label label-primary">git</a>
+  
+  <a href="/tags/gpg" class="label label-primary">gpg</a>
+  
+
+
+  </div>
+</div>
+
+    <p>
+  
+  
+    GPG and git on macOS Setup No need for homebrew or anything like that. Works with https://www.git-tower.com and the command line.
+ Install https://gpgtools.org &ndash; I&rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &ndash; see below for https://keybase.io Run gpg --list-secret-keys and look for sec, use the key ID for the next step Configure git to use GPG &ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="/2017/08/12/2017-08-12-git-gpg-verification/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
+  <h2><a href="/2017/08/12/2017-08-12-query-planner/">2017 08 12 Query Planner</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2017-08-12">12 Aug, 2017</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="/tags/pg" class="label label-primary">pg</a>
+  
+  <a href="/tags/sql" class="label label-primary">sql</a>
+  
+
+
+  </div>
+</div>
+
+    <p>
+  
+  
+    Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&rsquo;t have to go to disk.
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="/2017/08/12/2017-08-12-query-planner/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="/2017/07/21/base-usefull-commands/">Base usefull commands</a>
 </h2>
 
@@ -267,6 +350,14 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
         <ul>
         
           <li>
+          <a href="/2017/08/12/2017-08-12-git-gpg-verification/">2017 08 12 Git Gpg Verification</a>
+          </li>
+        
+          <li>
+          <a href="/2017/08/12/2017-08-12-query-planner/">2017 08 12 Query Planner</a>
+          </li>
+        
+          <li>
           <a href="/2017/07/21/base-usefull-commands/">Base usefull commands</a>
           </li>
         
@@ -290,7 +381,7 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
 
         <div class="content">
           <ul>
-            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sysctl">sysctl</a></li><li><a href="/tags/test">test</a></li><li><a href="/tags/welcome">welcome</a></li>
+            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/git">git</a></li><li><a href="/tags/gpg">gpg</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/pg">pg</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sql">sql</a></li><li><a href="/tags/sysctl">sysctl</a></li>
           </ul>
         </div>
       </div>
