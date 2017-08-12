@@ -3,12 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2017/08/12/2017-08-12-git-gpg-verification/</loc>
+    <loc>/2017/08/12/git-gpg-verification/</loc>
     <lastmod>2017-08-12T19:20:06+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/08/12/2017-08-12-query-planner/</loc>
+    <loc>/2017/08/12/query-planner/</loc>
     <lastmod>2017-08-12T19:20:06+02:00</lastmod>
   </url>
   
@@ -116,14 +116,14 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+    <loc>/tags/welcome/</loc>
+    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/welcome/</loc>
-    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   

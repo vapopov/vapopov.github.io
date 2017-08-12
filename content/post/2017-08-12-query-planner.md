@@ -1,5 +1,5 @@
 ---
-title: "2017 08 12 Query Planner"
+title: "Query Planner"
 date: 2017-08-12T19:20:06+02:00
 draft: false
 tags: ["pg", "sql"]

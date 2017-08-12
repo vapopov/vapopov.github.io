@@ -139,7 +139,7 @@ disqusShortname = "vpopov"
     [Languages.en]
     weight = 1
     copyright = "2017 (c)"
-    title = "Vadym Popov personal page" # Site title
+    title = "┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻" # Site title
 
     [[Languages.en.menu.main]]
     name = "Blog"
