@@ -71,6 +71,25 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
 fi
 ```
 
+Then we need to export public keys of sub-keys
+
+```bash
+# gpg2 --list-keys
+/Users/vadym/.gnupg/pubring.gpg
+-------------------------------
+pub   4096R/E5FEE3B2 2017-08-11
+uid       [ unknown] Vadym Popov <me@vpopov.org>
+sub   4096R/8A2940A7 2017-08-11
+sub   4096R/565DA837 2017-08-15
+sub   4096R/0D8DE79D 2017-08-17
+```
+
+Export the authentication private and public subkey:
+```bash 
+gpg2 --export-secret-subkeys --export-options export-reset-subkey-passwd 8A2940A7 | /usr/local/MacGPG2/bin/gpgkey2ssh 8A2940A7 > gpg-auth-keyfile
+
+```
+
 ## See Also
 
  * https://github.com/pstadler/keybase-gpg-github
