@@ -20,8 +20,7 @@
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/08/12/git-gpg-verification/</guid>
-      <description>GPG and git on macOS Setup No need for homebrew or anything like that. Works with https://www.git-tower.com and the command line.
- Install https://gpgtools.org &amp;ndash; I&amp;rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &amp;ndash; see below for https://keybase.io Run gpg --list-secret-keys and look for sec, use the key ID for the next step Configure git to use GPG &amp;ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.</description>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org &amp;ndash; I&amp;rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.</description>
     </item>
     
     <item>

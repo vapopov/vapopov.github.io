@@ -93,6 +93,12 @@
   </url>
   
   <url>
+    <loc>/tags/ssh/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/sysctl/</loc>
     <lastmod>2017-07-21T07:35:01+02:00</lastmod>
     <priority>0</priority>

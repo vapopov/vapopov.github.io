@@ -2,23 +2,21 @@
 title: "Git Gpg Verification"
 date: 2017-08-12T19:20:06+02:00
 draft: false
-tags: ["git", "gpg"]
+tags: ["git", "gpg", "ssh"]
 ---
 
-# GPG and git on macOS
+# GPG and git on MacOS
 
 ## Setup
 
-*No need* for homebrew or anything like that. Works with https://www.git-tower.com and the command line.
-
 - Install https://gpgtools.org -- I'd suggest to do a **customized install** and deselect **GPGMail**.
 - Create or import a key -- see below for https://keybase.io
-- Run `gpg --list-secret-keys` and look for `sec`, use the key ID for the next step
+- Run `gpg -K` to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign `S`)
 - Configure `git` to use GPG -- replace the key with the one from `gpg --list-secret-keys`
 
 ```
 git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
-git config --global user.signingkey A6B167E1 
+git config --global user.signingkey E5FEE3B2 
 git config --global commit.gpgsign true 
 ```
 Add this line to `~/.gnupg/gpg-agent.conf`
@@ -47,7 +45,7 @@ Add public GPG key to GitHub
 % keybase pgp export -q E5FEE3B2 | pbcopy
 ```
 
-## Use GPG with ssh-agent
+## Use GPG as SSH authentication 
 
 On your Mac edit the file ~/.gnupg/gpg-agent.conf to contain the following:
 
@@ -69,34 +67,60 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
        export SSH_AUTH_SOCK
        export SSH_AGENT_PID
 fi
+GPG_TTY=$(tty)
+export GPG_TTY
 ```
+`GPG_TTY` is needed in case if you don't want to use pinentry program from GPGSuite, and must show password dialog in your current active tty 
 
 Then we need to export public keys of sub-keys
-
 ```bash
-# gpg2 --list-keys
-/Users/vadym/.gnupg/pubring.gpg
+$ gpg2 -K
+/Users/vadym/.gnupg/secring.gpg
 -------------------------------
-pub   4096R/E5FEE3B2 2017-08-11
-uid       [ unknown] Vadym Popov <me@vpopov.org>
-sub   4096R/8A2940A7 2017-08-11
-sub   4096R/565DA837 2017-08-15
-sub   4096R/0D8DE79D 2017-08-17
+sec   4096R/E5FEE3B2 2017-08-11
+uid                  Vadym Popov <me@vpopov.org>
+uid                  [jpeg image of size 22756]
+ssb   4096R/8A2940A7 2017-08-11
+ssb   4096R/0D8DE79D 2017-08-17
+ssb   4096R/BB84E418 2017-08-17
 ```
 
-Export the authentication private and public subkey:
+On the moment of writing this article there were some issue with gpg-agent, so I had to export all private keys from old version of gpg that is delivered with GPGSuite to import to latest GnuGPG version.
+Export the authentication private key and subkey and import to newest version of GnuGPG:
 ```bash 
-gpg2 --export-secret-subkeys --export-options export-reset-subkey-passwd 8A2940A7 | /usr/local/MacGPG2/bin/gpgkey2ssh 8A2940A7 > gpg-auth-keyfile
-
+/usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 > private.gpg
+/usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418 > private_sub.gpg 
+gpg --import private.gpg
+gpg --import private_sub.gpg
 ```
 
-## See Also
+So now we need add our subkey with auth capability to sshcontrol file and restart gpg-agent
+```bash
+$ gpg -K --with-keygrip
+/Users/vadym/.gnupg/pubring.kbx
+-------------------------------
+sec   rsa4096 2017-08-11 [SC]
+      BFA968E385CDB1DA786BCEB7518ABC2FE5FEE3B2
+      Keygrip = 2A76E01E169B09A13F85CD2C755CEBDB46E7A86A
+uid        [ unbekannt ] Vadym Popov <me@vpopov.org>
+uid        [ unbekannt ] [jpeg image of size 22756]
+ssb   rsa4096 2017-08-11 [E]
+      Keygrip = F820B0F81509FBC09AB35E25E3DD02FB432E2D3D
+ssb   rsa4096 2017-08-17 [S]
+      Keygrip = 5ABA3AE4B2D9D3653383B231F56DE540CD38436E
+ssb   rsa4096 2017-08-17 [A]
+      Keygrip = A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C
+```
+Keygrip of our authentification key `A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C` must be added to `~/.gnugpg/sshcontrol`, after this our key should be visible for `ssh-add -l`
+```
+$ ssh-add -l
+4096 SHA256:iV18sELhAtjOXZ+UD4bwdTcC/spSSaFpoQrMEr5lDzk (none) (RSA)
+```
+
+## Links
 
  * https://github.com/pstadler/keybase-gpg-github
- * `/usr/local/MacGPG2` -- this is where MacGPG binaries live
- * https://gpgtools.org
- * https://www.git-tower.com
+ * https://alexcabal.com/creating-the-perfect-gpg-keypair/
+ * http://www.integralist.co.uk/posts/security-basics.html
+ * https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/
 
-
-
-[https://gist.github.com/danieleggert/b029d44d4a54b328c0bac65d46ba4c65]

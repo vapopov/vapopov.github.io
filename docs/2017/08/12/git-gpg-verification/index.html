@@ -14,7 +14,7 @@
 
 <meta name="description" content="" />
 
-<meta name="keywords" content="git, gpg, ">
+<meta name="keywords" content="git, gpg, ssh, ">
 
 
 <meta property="og:title" content="Git Gpg Verification  &middot; ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻ ">
@@ -33,6 +33,8 @@
 <meta property="og:article:tag" content="git">
     
 <meta property="og:article:tag" content="gpg">
+    
+<meta property="og:article:tag" content="ssh">
     
   
 
@@ -148,8 +150,8 @@
 
 
   <small>
-  &middot; Read in about 2 min
-  &middot; (217 words)
+  &middot; Read in about 3 min
+  &middot; (444 words)
   &middot; 
 <span class="share-box">Share this on:
     <a href="https://www.facebook.com/sharer/sharer.php?u=%2f2017%2f08%2f12%2fgit-gpg-verification%2f" onclick="window.open(this.href, 'mywin',
@@ -179,6 +181,8 @@
   
   <a href="/tags/gpg" class="label label-primary">gpg</a>
   
+  <a href="/tags/ssh" class="label label-primary">ssh</a>
+  
 
 
 </div>
@@ -192,21 +196,19 @@
       <div class="content">
   
 
-<h1 id="gpg-and-git-on-macos">GPG and git on macOS</h1>
+<h1 id="gpg-and-git-on-macos">GPG and git on MacOS</h1>
 
 <h2 id="setup">Setup</h2>
-
-<p><em>No need</em> for homebrew or anything like that. Works with <a href="https://www.git-tower.com">https://www.git-tower.com</a> and the command line.</p>
 
 <ul>
 <li>Install <a href="https://gpgtools.org">https://gpgtools.org</a> &ndash; I&rsquo;d suggest to do a <strong>customized install</strong> and deselect <strong>GPGMail</strong>.</li>
 <li>Create or import a key &ndash; see below for <a href="https://keybase.io">https://keybase.io</a></li>
-<li>Run <code>gpg --list-secret-keys</code> and look for <code>sec</code>, use the key ID for the next step</li>
+<li>Run <code>gpg -K</code> to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign <code>S</code>)</li>
 <li>Configure <code>git</code> to use GPG &ndash; replace the key with the one from <code>gpg --list-secret-keys</code></li>
 </ul>
 
 <pre><code>git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
-git config --global user.signingkey A6B167E1 
+git config --global user.signingkey E5FEE3B2 
 git config --global commit.gpgsign true 
 </code></pre>
 
@@ -235,7 +237,7 @@ git config --global commit.gpgsign true
 % keybase pgp export -q E5FEE3B2 | pbcopy
 </code></pre>
 
-<h2 id="use-gpg-with-ssh-agent">Use GPG with ssh-agent</h2>
+<h2 id="use-gpg-as-ssh-authentication">Use GPG as SSH authentication</h2>
 
 <p>On your Mac edit the file ~/.gnupg/gpg-agent.conf to contain the following:</p>
 
@@ -255,18 +257,66 @@ if [ -f &quot;${HOME}/.gpg-agent-info&quot; ]; then
        export SSH_AUTH_SOCK
        export SSH_AGENT_PID
 fi
+GPG_TTY=$(tty)
+export GPG_TTY
 </code></pre>
 
-<h2 id="see-also">See Also</h2>
+<p><code>GPG_TTY</code> is needed in case if you don&rsquo;t want to use pinentry program from GPGSuite, and must show password dialog in your current active tty</p>
+
+<p>Then we need to export public keys of sub-keys</p>
+
+<pre><code class="language-bash">$ gpg2 -K
+/Users/vadym/.gnupg/secring.gpg
+-------------------------------
+sec   4096R/E5FEE3B2 2017-08-11
+uid                  Vadym Popov &lt;me@vpopov.org&gt;
+uid                  [jpeg image of size 22756]
+ssb   4096R/8A2940A7 2017-08-11
+ssb   4096R/0D8DE79D 2017-08-17
+ssb   4096R/BB84E418 2017-08-17
+</code></pre>
+
+<p>On the moment of writing this article there were some issue with gpg-agent, so I had to export all private keys from old version of gpg that is delivered with GPGSuite to import to latest GnuGPG version.
+Export the authentication private key and subkey and import to newest version of GnuGPG:</p>
+
+<pre><code class="language-bash">/usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 &gt; private.gpg
+/usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418 &gt; private_sub.gpg 
+gpg --import private.gpg
+gpg --import private_sub.gpg
+</code></pre>
+
+<p>So now we need add our subkey with auth capability to sshcontrol file and restart gpg-agent</p>
+
+<pre><code class="language-bash">$ gpg -K --with-keygrip
+/Users/vadym/.gnupg/pubring.kbx
+-------------------------------
+sec   rsa4096 2017-08-11 [SC]
+      BFA968E385CDB1DA786BCEB7518ABC2FE5FEE3B2
+      Keygrip = 2A76E01E169B09A13F85CD2C755CEBDB46E7A86A
+uid        [ unbekannt ] Vadym Popov &lt;me@vpopov.org&gt;
+uid        [ unbekannt ] [jpeg image of size 22756]
+ssb   rsa4096 2017-08-11 [E]
+      Keygrip = F820B0F81509FBC09AB35E25E3DD02FB432E2D3D
+ssb   rsa4096 2017-08-17 [S]
+      Keygrip = 5ABA3AE4B2D9D3653383B231F56DE540CD38436E
+ssb   rsa4096 2017-08-17 [A]
+      Keygrip = A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C
+</code></pre>
+
+<p>Keygrip of our authentification key <code>A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C</code> must be added to <code>~/.gnugpg/sshcontrol</code>, after this our key should be visible for <code>ssh-add -l</code></p>
+
+<pre><code>$ ssh-add -l
+4096 SHA256:iV18sELhAtjOXZ+UD4bwdTcC/spSSaFpoQrMEr5lDzk (none) (RSA)
+</code></pre>
+
+<h2 id="links">Links</h2>
 
 <ul>
 <li><a href="https://github.com/pstadler/keybase-gpg-github">https://github.com/pstadler/keybase-gpg-github</a></li>
-<li><code>/usr/local/MacGPG2</code> &ndash; this is where MacGPG binaries live</li>
-<li><a href="https://gpgtools.org">https://gpgtools.org</a></li>
-<li><a href="https://www.git-tower.com">https://www.git-tower.com</a></li>
+<li><a href="https://alexcabal.com/creating-the-perfect-gpg-keypair/">https://alexcabal.com/creating-the-perfect-gpg-keypair/</a></li>
+<li><a href="http://www.integralist.co.uk/posts/security-basics.html">http://www.integralist.co.uk/posts/security-basics.html</a></li>
+<li><a href="https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/">https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/</a></li>
 </ul>
-
-<p>[<a href="https://gist.github.com/danieleggert/b029d44d4a54b328c0bac65d46ba4c65">https://gist.github.com/danieleggert/b029d44d4a54b328c0bac65d46ba4c65</a>]</p>
 
 </div>
 
@@ -376,7 +426,7 @@ fi
 
         <div class="content">
           <ul>
-            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/git">git</a></li><li><a href="/tags/gpg">gpg</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/pg">pg</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sql">sql</a></li><li><a href="/tags/sysctl">sysctl</a></li>
+            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/git">git</a></li><li><a href="/tags/gpg">gpg</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/pg">pg</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sql">sql</a></li><li><a href="/tags/ssh">ssh</a></li>
           </ul>
         </div>
       </div>

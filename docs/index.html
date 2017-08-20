@@ -143,6 +143,8 @@
   
   <a href="/tags/gpg" class="label label-primary">gpg</a>
   
+  <a href="/tags/ssh" class="label label-primary">ssh</a>
+  
 
 
   </div>
@@ -151,8 +153,7 @@
     <p>
   
   
-    GPG and git on macOS Setup No need for homebrew or anything like that. Works with https://www.git-tower.com and the command line.
- Install https://gpgtools.org &ndash; I&rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &ndash; see below for https://keybase.io Run gpg --list-secret-keys and look for sec, use the key ID for the next step Configure git to use GPG &ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.
+    GPG and git on MacOS Setup  Install https://gpgtools.org &ndash; I&rsquo;d suggest to do a customized install and deselect GPGMail. Create or import a key &ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &ndash; replace the key with the one from gpg --list-secret-keys  git config --global gpg.
   
 
 
@@ -381,7 +382,7 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
 
         <div class="content">
           <ul>
-            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/git">git</a></li><li><a href="/tags/gpg">gpg</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/pg">pg</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sql">sql</a></li><li><a href="/tags/sysctl">sysctl</a></li>
+            <li><a href="/tags/bash">bash</a></li><li><a href="/tags/git">git</a></li><li><a href="/tags/gpg">gpg</a></li><li><a href="/tags/linux">linux</a></li><li><a href="/tags/nginx">nginx</a></li><li><a href="/tags/pg">pg</a></li><li><a href="/tags/redis">redis</a></li><li><a href="/tags/rsync">rsync</a></li><li><a href="/tags/sql">sql</a></li><li><a href="/tags/ssh">ssh</a></li>
           </ul>
         </div>
       </div>
