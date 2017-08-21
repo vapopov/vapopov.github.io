@@ -5,5 +5,4 @@ draft: false
 tags: ["test", "welcome"]
 ---
 
-To start consuming experience and don't keep everything in mind, 
-everything will be dumped here 
+This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.

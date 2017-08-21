@@ -8,6 +8,7 @@
     <language>en-us</language>
     <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
     <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>2017 (c)</copyright>
     <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
@@ -57,7 +58,7 @@ redis-cli -h dev-1.example.com EVAL &amp;quot; local ttls = {} for i, name in ip
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/20/welcome/</guid>
-      <description>To start consuming experience and don&amp;rsquo;t keep everything in mind, everything will be dumped here</description>
+      <description>This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.</description>
     </item>
     
     <item>

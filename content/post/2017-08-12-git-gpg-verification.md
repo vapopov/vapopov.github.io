@@ -90,7 +90,7 @@ ssb   4096R/BB84E418 2017-08-17
 Export the authentication private key and subkey and import to newest version of GnuGPG:
 ```bash
 /usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 > private.gpg
-# GnuPG before version 2.1 cannot merge private keys (MacGPG2 is 2.0.30 version), you have add ! after to separate
+# GnuPG before version 2.1 cannot merge private keys, you have to add ! after to separate
 /usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418! 0D8DE79D! > private_sub.asc
 gpg --import private.asc
 gpg --import private_sub.asc
