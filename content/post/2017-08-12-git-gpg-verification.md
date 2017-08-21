@@ -9,15 +9,15 @@ tags: ["git", "gpg", "ssh"]
 
 ## Setup
 
-- Install https://gpgtools.org -- I'd suggest to do a **customized install** and deselect **GPGMail**.
+- Install https://gpgtools.org
 - Create or import a key -- see below for https://keybase.io
 - Run `gpg -K` to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign `S`)
-- Configure `git` to use GPG -- replace the key with the one from `gpg --list-secret-keys`
+- Configure `git` to use GPG -- replace the key with the one from `gpg --K`
 
 ```
 git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
-git config --global user.signingkey E5FEE3B2 
-git config --global commit.gpgsign true 
+git config --global user.signingkey E5FEE3B2
+git config --global commit.gpgsign true
 ```
 Add this line to `~/.gnupg/gpg-agent.conf`
 ```
@@ -45,16 +45,19 @@ Add public GPG key to GitHub
 % keybase pgp export -q E5FEE3B2 | pbcopy
 ```
 
-## Use GPG as SSH authentication 
+## Use GPG as SSH authentication
 
-On your Mac edit the file ~/.gnupg/gpg-agent.conf to contain the following:
+When I tried to use ssh auth with gpg, version of MacGPG2 was 2.0.30, but at homebrew latest was 2.1.23, there are many issues with old version and at the end attempt to use it not only as integration of encryption out of the box for mail client and services was failed :) In the internet easy to find a lot of articles how to configure it with Yubikey and most of them are related to versions of 2.1, and on my laptop I have them both - probably this is the issue. Also as I understood version 2.0 its so buggy, for example if you have 3 secret sub keys with different capabilities and one was imported, its not possible to import remaining without deleting everything.
+
+So I've decided to use version form homebrew by default, at least `gpg-agent` works well
+
+Edit the file ~/.gnupg/gpg-agent.conf to contain the following, in new version `write-env-file` option is deprecated so we don't put it there:
 
 ```
 default-cache-ttl 600
 max-cache-ttl 7200
 pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
 enable-ssh-support
-write-env-file
 ```
 
 Now edit ~/.profile to contain the following:
@@ -70,9 +73,8 @@ fi
 GPG_TTY=$(tty)
 export GPG_TTY
 ```
-`GPG_TTY` is needed in case if you don't want to use pinentry program from GPGSuite, and must show password dialog in your current active tty 
+`GPG_TTY` is needed in case if you don't want to use pinentry program from GPGSuite, and must show password dialog in your current active tty
 
-Then we need to export public keys of sub-keys
 ```bash
 $ gpg2 -K
 /Users/vadym/.gnupg/secring.gpg
@@ -85,13 +87,13 @@ ssb   4096R/0D8DE79D 2017-08-17
 ssb   4096R/BB84E418 2017-08-17
 ```
 
-On the moment of writing this article there were some issue with gpg-agent, so I had to export all private keys from old version of gpg that is delivered with GPGSuite to import to latest GnuGPG version.
 Export the authentication private key and subkey and import to newest version of GnuGPG:
-```bash 
+```bash
 /usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 > private.gpg
-/usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418 > private_sub.gpg 
-gpg --import private.gpg
-gpg --import private_sub.gpg
+# GnuPG before version 2.1 cannot merge private keys (MacGPG2 is 2.0.30 version), you have add ! after to separate
+/usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418! 0D8DE79D! > private_sub.asc
+gpg --import private.asc
+gpg --import private_sub.asc
 ```
 
 So now we need add our subkey with auth capability to sshcontrol file and restart gpg-agent
@@ -123,4 +125,3 @@ $ ssh-add -l
  * https://alexcabal.com/creating-the-perfect-gpg-keypair/
  * http://www.integralist.co.uk/posts/security-basics.html
  * https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/
-

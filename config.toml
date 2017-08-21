@@ -1,33 +1,20 @@
 publishDir = "docs"
 
-baseurl = "/"
+baseurl = ""
 
-DefaultContentLanguage = "en"
+languageCode = "en-us"
+defaultContentLanguage = "en-us"
+title = "┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻"
+theme = "hugo-tranquilpeak-theme"
 
-# If you want all of the languages to be put below their respective language code,
-# enable DefaultContentLanguageInSubdir = true. Without enabling it english content
-# will be in the root and other languages in their respective subfolder such as /sv/.
-# See [Languages] settings at the end of this file.
-
-# Language
-languageCode = "en"
-
-# SES friendly url:s
+disqusShortname = "vpopov"
+googleAnalytics = "UA-103006315-1"
+paginate = 7
 canonifyurls = true
 
 # Metadata format
 # "yaml", "toml", "json"
 metaDataFormat = "toml"
-
-# Theme to use (located in /themes/THEMENAME/)
-theme = "hugo-bootstrap-premium"
-
-# Pagination
-paginate = 10
-paginatePath = "page"
-
-# Enable Disqus integration
-disqusShortname = "vpopov"
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
@@ -40,137 +27,131 @@ disqusShortname = "vpopov"
 [author]
     name = "Vadym Popov"
     email = "me@vpopov.org"
+    job = "жоб"
+    location = "Berlin, Germany"
+    # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
+    gravatarEmail = "me@vpopov.org"
+    # picture = ""
 
-#
-# All parameters below here are optional and can be mixed and matched.
-#
+# Menu Configuration
+[[menu.main]]
+  weight = 0
+  identifier = "home"
+  name = "Home"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
+  url = "/"
+[[menu.main]]
+  weight = 1
+  identifier = "topics"
+  name = "Categories"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
+  url = "/categories"
+[[menu.main]]
+  weight = 2
+  identifier = "tags"
+  name = "Tags"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
+  url = "/tags"
+[[menu.main]]
+  weight = 3
+  identifier = "about"
+  name = "About"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
+  url = "/#about"
 
-# bootswatch theme name, unmark and select one: cerulean, cosmo, cyborg, darkly,
-# default, flatly, journal,  lumen, paper, readable, sandstone, simplex,
-# slate, spacelab, superhero, united, yeti.
+[[menu.links]]
+  weight = 0
+  identifier = "github"
+  name = "GitHub"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
+  url = "https://github.com/vapopov"
 
-[params.theme]
-  name = "cosmo"
 
-[params.popover]
-  # This is a highly configurable popover form.
-  enablepopover = false #enable or disable popover: true/false.
-  posturl = "https://zapier.com/hooks/..."
-  headerimage = " "
-  expirecookie = 5 #show it again after number of days to visitor that has not subscribed.
-  cookiename = "zion" #give the cookie a unique name variable (avoid spaces and strange characters).
-  signupheader = "Join Our Newsletter"
-  showmodaltimeout = 10000 #show popover modal after time interval in milliseconds.
-  mouseleave = true #show popover when mouse leaves window: true/false.
-  modalsize = "" #lg or sm. Empty is md. If phone is detected lg is used.
-  imagedescription = "Placeholder image for this popover modal optin form"
-  signuptext = "Signup today for free and be the first to get notified on new updates."
-  inputplaceholder = "Enter your email"
-  submitbutton = "Subscribe"
-  successmessage = "Thanks for your subscription!"
-  errormessage = "Submitting form failed!"
-  optin = true #opt-in: true/false
 
 [params]
-    # menu for changing language. This changes languages with js and stores the choice with the help
-    # of JavaScript in a Cookie. Then the path is rewritten with pathnamereplace.js. The name of the
-    # md files needs to have the same name for each language abbreviation to work correctly. Example:
-    # showcase.en.md and showcase.sv.md. It only works if DefaultContentLanguageInSubdir = true
-    switchlang = false
+  # Customize date format use to render blog post date, categories and other
+  # You must use date format used by Go Time package https://golang.org/pkg/time/
+  # Months (not work with short month like "jan", "feb", etc) are translated if translation exists on i18n folders
+  # Default format is: January 2, 2006
+  # dateFormat = "2 January 2006"
 
-    # You can use markdown here.
-    BrandImage = "" #top header brand image.
-    brand = "blog" # brand image alt text.
-    topline = "few words about your site"
-    footline = "code with <i class='fa fa-heart'></i>"
+  # Global keywords configuration. Following keywords will be add to every pages
+  # keywords = ["development", "next-gen"]
 
-    # Show a sidebar menu
-    showRightSidebar = true
+  # Hide sidebar on all article page to let article take full width to improve reading, and enjoy wide images and cover images. (true: enable, false: disable)
+  clearReading = true
 
-    # Text for the top menu link, which goes the root URL for the site.
-    # Default (if omitted) is "Home".
-    home = "home"
+  # Define categories will create hierarchy between parents: `categories = ["foo", "bar"]` will consider "bar" a sub-category of "foo".
+  # If false it will flat categories.
+  hierarchicalCategories = true
 
-    mailmunchid = "" # Mailmunch site id
-    sumomeid = "" # Sumome id
+  description = "Public Notes"
 
-    # Select a syntax highight.
-    # Check the static/css/highlight directory for options.
-    highlight = "default"
+  # Customization
+  # Define the behavior of the sidebar
+  # 1: Display extra large sidebar on extra large screen, large sidebar on large screen,
+  #    medium sidebar on medium screen and header bar on small screen and
+  # extra large sidebar is swiped on extra large screen and large sidebar on all lower screen (default)
+  # 2: Display large sidebar on large screen, medium sidebar on medium screen and
+  #    header bar on small screen and large sidebar is swiped
+  # 3: Display medium sidebar on large and medium screen and header bar on small screen and
+  #    medium sidebar is swiped
+  # 4: Display header bar on all screens, extra large sidebar is swiped on extra large screen and
+  #    large sidebar is swiped on all lower screens
+  # 5: Display header bar on all screens and large sidebar is swiped on large screen
+  # 6: Display header bar on all screens and medium sidebar is swiped
+  sidebarBehavior = 3
 
-    # Google Analytics.
-    googleAnalytics = "UA-103006315-1"
+  # Your blog cover picture. I STRONGLY recommend you to use a CDN to speed up loading of pages.
+  # There is many free CDN like Cloudinary or you can also use indirectly
+  # by using services like Google Photos.
+  # Current image is on AWS S3 and delivered by AWS CloudFront.
+  # Otherwise put your image in folder `static/_images/` (development)  or in `source/assets/images/` if you can't or don't want to build the theme,
+  # and use relative url : `your-image.png`
+  coverImage = "cover.jpg"
 
-    # Sidebar social links.
-    github = "vapopov" # Your Github profile ID
-    bitbucket = "" # Your Bitbucket profile ID
-    linkedin = "in-vapopov" # Your LinkedIn profile ID (from public URL)
-    googleplus = "" # Your Google+ profile ID
-    facebook = "" # Your Facebook profile ID
-    twitter = "" # Your Twitter profile ID
-    youtube = ""  # Your Youtube channel ID
-    flattr = ""  # populate with your flattr uid
+  # Display an image gallery at the end of a post which have photos variables (false: disabled, true: enabled)
+  imageGallery = true
 
-[blackfriday]
-    angledQuotes = true
-    fractions = false
-    hrefTargetBlank = false
-    latexDashes = true
-    plainIdAnchors = true
-    extensions = []
-    extensionmask = []
+  # Display thumbnail image of each post on index pages (false: disabled, true: enabled)
+  thumbnailImage = true
+  # Display thumbnail image at the right of title in index pages (`right`, `left` or `bottom`)
+  # Set this value to `right` if you have old posts to keep the old style on them
+  # and define `thumbnailImagePosition` on a post to overwrite this setting
+  thumbnailImagePosition = "bottom"
+  # Automatically select the cover image or the first photo from the gallery of a post if there is no thumbnail image as the thumbnail image
+  # Set this value to `true` if you have old posts that use the cover image or the first photo as the thumbnail image
+  # and set `autoThumbnailImage` to `false` on a post to overwrite this setting
+  autoThumbnailImage = true
 
-    # Menus
-    # If you want active menu items highlighted for internal pages don't add them here, they need to be added in each files front matter.
-    # like this:
-    #[menu]
-    #     [menu.main]
-    #        name = "Showcase"
-    #        weight = 3
-    #        identifier = "showcase"
-    # i18n menus. A menu will be added for each language to the right in the top menu. This menu will switch to the selected language. Remember to add the corresponding language in pathnamereplace.js.
-    #[[Languages.sv.menu.switchlang]]
-    #  name = "English"
-    #  identifier = ""
-    #  weight = 4
-    #  url = "en"
+  # Your favicon path, default is "/favicon.png"
+  # favicon = "/favicon.png"
 
-    [Languages]
-    [Languages.en]
-    weight = 1
-    copyright = "2017 (c)"
-    title = "┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻" # Site title
+  # Header configuration
+  # The link at the right of the header is customizable
+  # You can add a link (as an icon) at the right of the header instead of the author's gravatar image or author's picture.
+  # By default, author's gravatar or author's picture is displayed.
+  #     url: /#search
+  #     icon: search
+  #     class: st-search-show-outputs
 
-    [[Languages.en.menu.main]]
-    name = "Blog"
-    pre = ""
-    weight = 2
-    identifier = "post"
-    url = "/post/"
+  # Custom CSS. Put here your custom CSS files. They are loaded after the theme CSS;
+  # they have to be referred from static root. Example
+  # customCSS = ["css/foo.css"]
 
-    [[Languages.en.menu.main]]
-    name = "About"
-    weight = 1
-    identifier = ""
-    url = "#/about"
-    pre = "<i class='fa fa-road'></i>"
+  # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
+  # they have to be referred from static root. Example
+  # customJS = ["js/foo.js"]
 
-    [[Languages.en.menu.main]]
-    name = "Dashboard"
-    identifier = ""
-    weight = 3
-    url = "/"
+  [params.header.rightLink]
+    class = ""
+    icon = ""
+    url = "/#about"
 
-    [[Languages.en.menu.footer]] # add  links to the bottom right corner.
-    name = "Disclaimer"
-    pre = "<i>&middot;</i>"
-    identifier = "disclaimer"
-    weight = 1
-    url = "/disclaimer/"
+  # Customize link of author avatar in sidebar
+  # [params.sidebar.profile]
+  #   url = "/#about"
 
-    [[Languages.en.menu.footer]]
-    name = "Terms"
-    identifier = "terms"
-    weight = 2
-    url = "/terms/"
-
+  # Customize copyright value "© 2016 <CUSTOMIZATION>. All Rights Reserved"
+  [params.footer]
+    copyright = "<a href=\"https://github.com/vapopov\">code 🙈</a>"
