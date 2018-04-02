@@ -8,7 +8,6 @@
     <language>en-us</language>
     <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
     <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
-    <copyright>2017 (c)</copyright>
     <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
@@ -21,6 +20,16 @@
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/08/12/git-gpg-verification/</guid>
       <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
+    </item>
+    
+    <item>
+      <title>Base usefull commands</title>
+      <link>/2017/07/21/base-usefull-commands/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      <author>me@vpopov.org (Vadym Popov)</author>
+      <guid>/2017/07/21/base-usefull-commands/</guid>
+      <description>Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+git push vp origin/master:refs/heads/master Counting objects: 9, done. Delta compression using up to 4 threads. Compressing objects: 100% (9/9), done. Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done. Total 9 (delta 6), reused 0 (delta 0) remote: Resolving deltas: 100% (6/6), completed with 4 local objects. To github.</description>
     </item>
     
   </channel>

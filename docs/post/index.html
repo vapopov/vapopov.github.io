@@ -17,8 +17,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.25.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
     <title>Posts</title>
     <meta name="author" content="Vadym Popov">
     <meta name="keywords" content="">
@@ -55,12 +54,12 @@
     
 
     
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
     
     
 
@@ -165,12 +164,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/vapopov">
+      <a class="sidebar-button-link " href="/https://github.com/vapopov">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -178,9 +178,11 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
+
     </ul>
   </div>
 </nav>
@@ -215,23 +217,22 @@ ga('send', 'pageview');
           Git Gpg Verification
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-08-12T19:20:06&#43;02:00">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-08-12T19:20:06&#43;02:00">
+        
   August 12, 2017
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
+      GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &ndash; replace the key with the one from gpg --K  git config --global gpg.
       <p>
-        GPG and git on MacOS Setup  Install <a href="https://gpgtools.org">https://gpgtools.org</a> Create or import a key &ndash; see below for <a href="https://keybase.io">https://keybase.io</a> Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &ndash; replace the key with the one from gpg &ndash;K  git config &ndash;global gpg.
-        <br>
         <a href="/2017/08/12/git-gpg-verification/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -262,23 +263,22 @@ ga('send', 'pageview');
           Query Planner
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-08-12T19:20:06&#43;02:00">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-08-12T19:20:06&#43;02:00">
+        
   August 12, 2017
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
+      Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&rsquo;t have to go to disk.
       <p>
-        Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&rsquo;t have to go to disk.
-        <br>
         <a href="/2017/08/12/query-planner/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -309,25 +309,23 @@ ga('send', 'pageview');
           Base usefull commands
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-07-21T07:35:01&#43;02:00">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-07-21T07:35:01&#43;02:00">
+        
   July 21, 2017
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
+      Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+git push vp origin/master:refs/heads/master Counting objects: 9, done. Delta compression using up to 4 threads. Compressing objects: 100% (9/9), done. Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done. Total 9 (delta 6), reused 0 (delta 0) remote: Resolving deltas: 100% (6/6), completed with 4 local objects. To github.
       <p>
-        Redis multi actions Remove values by pattern
-redis-cli -h dev-1.example.com EVAL &quot;local keys = redis.call(&lsquo;keys&rsquo;, ARGV[1]) for i=1,#keys,5000 do redis.call(&lsquo;del&rsquo;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&quot; 0 pattern:*  Check TTL by pattern
-redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs(redis.call(&lsquo;KEYS&rsquo;, ARGV[1])) do ttls[i] = {redis.call(&lsquo;ttl&rsquo;, name), name}; end return ttls&quot; 0 <em>pattern</em>  Rsync Create and transfer archive directly to the remote host $ tar -zc .
-        <br>
         <a href="/2017/07/21/base-usefull-commands/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -358,23 +356,22 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
           Server optimisation for nginx
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-07-21T07:35:01&#43;02:00">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-07-21T07:35:01&#43;02:00">
+        
   July 21, 2017
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
+       Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &quot;10152 65535&quot; &gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240  
       <p>
-        Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &quot;10152 65535&quot; &gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240
-        <br>
         <a href="/2017/07/21/server-optimisation-for-nginx/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -405,23 +402,22 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
           Welcome
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-07-20T00:47:34&#43;02:00">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-07-20T00:47:34&#43;02:00">
+        
   July 20, 2017
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
+      This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.
       <p>
-        This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.
-        <br>
         <a href="/2017/07/20/welcome/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -436,7 +432,7 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
         </section>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2017 <a href="https://github.com/vapopov">code 🙈</a>. All Rights Reserved
+    &copy; 2018 <a href="https://github.com/vapopov">code 🙈</a>. All Rights Reserved
   </span>
 </footer>
 
@@ -474,7 +470,7 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
   <div class="modal">
     <div class="modal-header">
       <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
         <span class="searchby-algolia-text text-color-light text-small">by</span>
         <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
       </a>
@@ -534,9 +530,8 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
                   Jul 7, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Redis multi actions Remove values by pattern
-redis-cli -h dev-1.example.com EVAL &quot;local keys = redis.call('keys', ARGV[1]) for i=1,#keys,5000 do redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) end return keys&quot; 0 pattern:*  Check TTL by pattern
-redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs(redis.call('KEYS', ARGV[1])) do ttls[i] = {redis.call('ttl', name), name}; end return ttls&quot; 0 *pattern*  Rsync Create and transfer archive directly to the remote host $ tar -zc .</div>
+              <div class="media-content hide-xs font-merryweather">Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+git push vp origin/master:refs/heads/master Counting objects: 9, done. Delta compression using up to 4 threads. Compressing objects: 100% (9/9), done. Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done. Total 9 (delta 6), reused 0 (delta 0) remote: Resolving deltas: 100% (6/6), completed with 4 local objects. To github.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -576,23 +571,6 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/post/">
-                <h3 class="media-heading">Posts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -600,7 +578,7 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         6 posts found
+         5 posts found
       </p>
     </div>
   </div>
@@ -613,32 +591,13 @@ redis-cli -h dev-1.example.com EVAL &quot; local ttls = {} for i, name in ipairs
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
-</script>
 
 
 

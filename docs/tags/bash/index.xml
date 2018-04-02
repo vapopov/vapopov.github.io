@@ -8,7 +8,6 @@
     <language>en-us</language>
     <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
     <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
-    <copyright>2017 (c)</copyright>
     <lastBuildDate>Fri, 21 Jul 2017 07:35:01 +0200</lastBuildDate>
     
 	<atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml" />
@@ -20,9 +19,8 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/21/base-usefull-commands/</guid>
-      <description>Redis multi actions Remove values by pattern
-redis-cli -h dev-1.example.com EVAL &amp;quot;local keys = redis.call(&#39;keys&#39;, ARGV[1]) for i=1,#keys,5000 do redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) end return keys&amp;quot; 0 pattern:*  Check TTL by pattern
-redis-cli -h dev-1.example.com EVAL &amp;quot; local ttls = {} for i, name in ipairs(redis.call(&#39;KEYS&#39;, ARGV[1])) do ttls[i] = {redis.call(&#39;ttl&#39;, name), name}; end return ttls&amp;quot; 0 *pattern*  Rsync Create and transfer archive directly to the remote host $ tar -zc .</description>
+      <description>Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+git push vp origin/master:refs/heads/master Counting objects: 9, done. Delta compression using up to 4 threads. Compressing objects: 100% (9/9), done. Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done. Total 9 (delta 6), reused 0 (delta 0) remote: Resolving deltas: 100% (6/6), completed with 4 local objects. To github.</description>
     </item>
     
   </channel>

@@ -2,8 +2,42 @@
 title: "Base usefull commands"
 date: 2017-07-21T07:35:01+02:00
 draft: false
-tags: ["bash", "rsync", "redis"]
+tags: ["bash", "rsync", "redis", "git"]
 ---
+
+## Git base workflow
+
+Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+```bash
+git push vp origin/master:refs/heads/master
+Counting objects: 9, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done.
+Total 9 (delta 6), reused 0 (delta 0)
+remote: Resolving deltas: 100% (6/6), completed with 4 local objects.
+To github.com:vapopov/lnd.git
+   92eebff6..9b729654  origin/master -> master
+```
+
+If you need to update all branches in remote repository
+```bash
+git push rorg refs/remotes/origin/*:refs/heads/*
+Counting objects: 293, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (67/67), done.
+Writing objects: 100% (176/176), 48.32 KiB, done.
+Total 176 (delta 105), reused 168 (delta 97)
+remote: Resolving deltas:  11% (12/105)
+To MY_REPOSITORY_URL
+ * [new branch]      korg/gingerbread-> gingerbread
+ * [new branch]      korg/gingerbread-release -> gingerbread-release
+ * [new branch]      korg/honeycomb-> honeycomb
+ * [new branch]      korg/HEAD -> HEAD
+ * [new branch]      korg/honeycomb-mr1-release-> honeycomb-mr1-release
+ * [new branch]      korg/master -> master
+```
+
 
 ## Redis multi actions
 
