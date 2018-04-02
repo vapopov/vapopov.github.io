@@ -7,7 +7,7 @@ defaultContentLanguage = "en-us"
 title = "┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻"
 theme = "hugo-tranquilpeak-theme"
 
-disqusShortname = "vpopov"
+disqusShortname = "vadympopov"
 googleAnalytics = "UA-103006315-1"
 paginate = 7
 canonifyurls = true
@@ -27,7 +27,7 @@ metaDataFormat = "toml"
 [author]
     name = "Vadym Popov"
     email = "me@vpopov.org"
-    job = "жоб"
+    job = "job"
     location = "Berlin, Germany"
     # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
     gravatarEmail = "me@vpopov.org"
