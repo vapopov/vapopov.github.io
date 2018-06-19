@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
+    <meta name="generator" content="Hugo 0.38.1 with theme Tranquilpeak 0.4.3-BETA">
     <title>Base usefull commands</title>
     <meta name="author" content="Vadym Popov">
     <meta name="keywords" content="">
@@ -279,7 +279,14 @@ end
 return ttls&quot; 0 *pattern*
 </code></pre>
 
-<h2 id="rsync">Rsync</h2>
+<h2 id="ssh-scp">SSH/SCP</h2>
+
+<h3 id="create-backup-from-remote-host-data-docker-volume">Create backup from remote host data docker volume</h3>
+
+<p>Entrypoint should be dropped, because it may contain some execution which could add some data to stdout</p>
+
+<pre><code class="language-bash">ssh user@remote.host &quot;docker-compose -f ~/service/docker-compose.yml run --entrypoint=&quot;&quot; --rm servicename tar -zc /internal/volume&quot; | tar -zx -C ~/where/to/create
+</code></pre>
 
 <h3 id="create-and-transfer-archive-directly-to-the-remote-host">Create and transfer archive directly to the remote host</h3>
 
@@ -291,6 +298,8 @@ $ tar -zc ./path | ssh user@remote.host &quot;tar -zx -C /destination&quot;
 
 <pre><code class="language-bash">rsync -e ssh -azv --exclude 'exclude.py' user@example.com:/var/www/example.com/ /var/www/example.com/
 </code></pre>
+
+<h2 id="rsync">Rsync</h2>
 
 <h3 id="sync-files-and-directory-locally">Sync files and directory locally</h3>
 

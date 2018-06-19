@@ -59,7 +59,13 @@ end
 return ttls" 0 *pattern*
 ```
 
-## Rsync
+## SSH/SCP
+
+### Create backup from remote host data docker volume
+Entrypoint should be dropped, because it may contain some execution which could add some data to stdout
+```bash
+ssh user@remote.host "docker-compose -f ~/service/docker-compose.yml run --entrypoint="" --rm servicename tar -zc /internal/volume" | tar -zx -C ~/where/to/create
+```
 
 ### Create and transfer archive directly to the remote host
 ```bash
@@ -71,6 +77,8 @@ $ tar -zc ./path | ssh user@remote.host "tar -zx -C /destination"
 ```bash
 rsync -e ssh -azv --exclude 'exclude.py' user@example.com:/var/www/example.com/ /var/www/example.com/
 ```
+
+## Rsync
 
 ### Sync files and directory locally
 
