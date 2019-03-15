@@ -5,6 +5,18 @@ draft: false
 tags: ["bash", "rsync", "redis", "git"]
 ---
 
+## Docker
+Mount portworx volume to the empty container
+```bash
+docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh
+```
+
+## Unix Filesystem 
+Remove files that is older than 7 days with specified file mask
+```bash
+find /data/ -mtime +7 -name "*.gz" -exec rm {} \;
+```
+
 ## Git base workflow
 
 Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
