@@ -37,8 +37,10 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       <author>me@vpopov.org (Vadym Popov)</author>
       <guid>/2017/07/21/base-usefull-commands/</guid>
-      <description>Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
-git push vp origin/master:refs/heads/master Counting objects: 9, done. Delta compression using up to 4 threads. Compressing objects: 100% (9/9), done. Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done. Total 9 (delta 6), reused 0 (delta 0) remote: Resolving deltas: 100% (6/6), completed with 4 local objects. To github.</description>
+      <description>Docker Mount portworx volume to the empty container
+docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh  Unix Filesystem Remove files that is older than 7 days with specified file mask
+find /data/ -mtime +7 -name &amp;quot;*.gz&amp;quot; -exec rm {} \;  Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
+git push vp origin/master:refs/heads/master Counting objects: 9, done.</description>
     </item>
     
     <item>
