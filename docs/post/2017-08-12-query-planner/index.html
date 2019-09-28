@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+    <base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="author" content="John Doe">
+
+<meta name="description" content="">
+
+<title>Query Planner</title>
+<meta name="generator" content="Hugo 0.58.2" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+<link  href="/css/theme.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="page-container container-fluid">
+<div class="col-md-3 menu">
+    <nav class="col-md-3">
+    
+    <h3 class="home-link"><a href="">Root</a></h3>
+    <div id="last-posts" class="open">
+        <h3 data-open="last-posts">Vadym Popov - Most recent posts</h3>
+        <ul>
+            
+            <li><a href="/post/2017-08-12-git-gpg-verification/">Git Gpg Verification</a></li>
+            
+            <li><a href="/post/2017-08-12-query-planner/">Query Planner</a></li>
+            
+            <li><a href="/post/2017-03-01-base-usefull-commands/">Base usefull commands</a></li>
+            
+            <li><a href="/post/2017-06-01-nginx-optimization/">Server optimisation for nginx</a></li>
+            
+            <li><a href="/post/welcome/">Welcome</a></li>
+            
+            <li><a href="/showcase/"></a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+    <div id="tags" class="open">
+        <h3 data-open="tags">Tags</h3>
+        <ul class="tags">
+            
+            <li><a href="/tags/bash">bash</a></li>
+            
+            <li><a href="/tags/git">git</a></li>
+            
+            <li><a href="/tags/gpg">gpg</a></li>
+            
+            <li><a href="/tags/linux">linux</a></li>
+            
+            <li><a href="/tags/nginx">nginx</a></li>
+            
+            <li><a href="/tags/pg">pg</a></li>
+            
+            <li><a href="/tags/redis">redis</a></li>
+            
+            <li><a href="/tags/rsync">rsync</a></li>
+            
+            <li><a href="/tags/sql">sql</a></li>
+            
+            <li><a href="/tags/ssh">ssh</a></li>
+            
+            <li><a href="/tags/sysctl">sysctl</a></li>
+            
+            <li><a href="/tags/test">test</a></li>
+            
+            <li><a href="/tags/welcome">welcome</a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+</nav>
+
+</div>
+<div class="col-md-9 content">
+
+<h1>Query Planner</h1>
+<h4>Published 08-12-2017 19:20:06</h4>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="kendo5731"></a>
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, 'script', 'twitter-wjs');</script>
+
+<div class="fb-share-button" data-href="/post/2017-08-12-query-planner/" data-layout="button"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en-US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<article>
+    
+
+<h1 id="types-of-index-scans">Types of index scans</h1>
+
+<h1 id="indexes">Indexes</h1>
+
+<h2 id="sequential-scan">Sequential Scan:</h2>
+
+<ul>
+<li>Read every row in the table</li>
+<li>No reading of index. Reading from indexes is also expensive.</li>
+<li>Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.</li>
+</ul>
+
+<h2 id="index-scan">Index Scan:</h2>
+
+<ul>
+<li>Index Scan or Bitmap Index Scan: Read the index, hoping that we won&rsquo;t have to go to disk. Index vs. Bitmap is not about what kind of index we&rsquo;re using. It&rsquo;s actually two different ways of using the index. Index scan reads the index in alternation, bouncing between table and index, row at a time. The bitmap index will read all the relevant info from the index first, then read from the table based on what the index tells us.</li>
+<li>Performance gain when reading a few rows from a big table. It goes to the index, finds the rows</li>
+<li>Only method of accessing a table the can return rows in sorted order - useful in combination with LIMIT.</li>
+<li>Disadvantage: Causes random I/O against the base table. Read a row from the index, then a row from the table, and so on.</li>
+</ul>
+
+<h2 id="bitmap-index-scan">Bitmap Index Scan:</h2>
+
+<ul>
+<li>Scans all index rows before examining base table. This populates a TID bitmap.</li>
+<li>Table I/O is sequential, with skips.; results in physical order.</li>
+<li>Can efficiently combine data from multiple indeces. the TID bitmap can handle boolean ANDs and ORs.</li>
+<li>Handles LIMIT poorly.</li>
+<li>Adjust page cost parameters to use Index scans vs Bitamp scans on queries where it makes sense.</li>
+</ul>
+
+<p>SMALL INDEXES ARE BETTER. Less columns are better. Avoid multicolumn indexes.</p>
+
+<h1 id="join-planning">Join planning</h1>
+
+<ul>
+<li>Fixing the join order and join strategy is the harder part of query planning.</li>
+<li>When search space is small, planner does a nearly exhaustive search. When search space is too large, planner uses GEQO (genetic planner) to limit planning time and mem usage.</li>
+</ul>
+
+<h2 id="join-strategies">Join Strategies</h2>
+
+<h2 id="nested-loop">Nested loop</h2>
+
+<pre><code>for (each outer tuple)
+  for (each inner tuple)
+    if (join condition is met)
+      emit result row;
+</code></pre>
+
+<p>For a 3 table join, a, b and c, reduce problem to a two table join: (a &amp;&amp; b) &amp;&amp; c, or a &amp;&amp; (b &amp;&amp; c), or &hellip;</p>
+
+<h2 id="merge-join">Merge join</h2>
+
+<ul>
+<li>Only handles equality joins</li>
+<li>Puts both input relations in sorted order (sort or index scan), and match up on equal values by scanning through the two in parallel.</li>
+<li>Only way to handle really big datasets, however merge joins are slower.</li>
+</ul>
+
+<h2 id="hash-join">Hash join</h2>
+
+<ul>
+<li>Also only equality joins.</li>
+<li>Hash each row from the inner relation to ceate a hash table. Then hash the outer relation and probe the hash table for matches.</li>
+<li>Very fast - but requires enough memory to store inner tuples. Can get around this using multiple &ldquo;batches&rdquo;. If work_mem is 1MB, and the hash requires 2MB. The planner does this.</li>
+<li>Not guaranteed to retain input ordering. This is because the planner is capable of doing the hash join in multiple batches. So when combined with a nested loop there may be a higher cost.</li>
+</ul>
+
+<h2 id="join-removal">Join Removal</h2>
+
+<ul>
+<li>It can detect that a LEFT OUTER join is not used and remove it entirely. Ex: SELECT foo.a, foo.b from foo LEFT OUTER JOIN bar on foo.a = bar.a</li>
+<li>For example, big view where you request a subset of attributes.</li>
+</ul>
+
+<h2 id="join-reordering">Join Reordering</h2>
+
+<ul>
+<li>It doesn&rsquo;t matter what the order in which you write the JOINs, postgres will decide the best plan. Available for ages&hellip;</li>
+<li>Can&rsquo;t reorder in the presence of LEFT JOINs.</li>
+<li>It will reorder joins as much as it can, but will be constrained by left joins.</li>
+</ul>
+
+<p>These two queries are different and can&rsquo;t be reordered:</p>
+
+<pre><code>SELECT * FROM
+  (foo JOIN bar ON foo.x = bar.x)
+  LEFT JOIN baz ON foo.y = baz.y
+
+SELECT * FROM
+  (foo LEFT JOIN baz ON foo.y = baz.y)
+  JOIN bar ON foo.x = bar.x
+</code></pre>
+
+<h2 id="explain-estimates">EXPLAIN estimates</h2>
+
+<ul>
+<li>number of rows estimates</li>
+<li>average width (byte) of each row (not that important)</li>
+<li>cost is in &ldquo;abstract cost units&rdquo;. Ex: Relative costs of an index fetch vs a sequential page seek. These are not miliseconds.</li>
+<li>First cost is startup, second number is total</li>
+<li>Actual time is miliseconds, provided by EXPLAIN ANALYZE</li>
+<li>When looking at EXPLAIN ANALYZE output, look for:
+
+<ul>
+<li>where is the most time spent? In a bad query plan, find which branch was most costly? Identify which table is more problematic? Add an index?</li>
+<li>Are the estimates and actuals very different? Have you analyzed the table recently. But sometimes these problems are caused by correlation between columns, and may require redesigning schema or the query. This is a rare/complex case though.</li>
+<li>It&rsquo;s useful to remove JOINs or conditions that don&rsquo;t matter to the problem. Like remove a 5 table join which can be boiled down to a 2 table join. And if you are able to reproduce the problem with the 2 table join query, it&rsquo;ll be much simpler to troubleshoot.</li>
+</ul></li>
+</ul>
+
+<h1 id="aggregates-and-distinct">Aggregates and DISTINCT</h1>
+
+<h2 id="plain-aggregate">Plain aggregate</h2>
+
+<ul>
+<li>Aggregating everything into one group, producing one row. SELECT count(*) from foo where x = 2;</li>
+<li>Gets more complex when there&rsquo;s a group by and there are many rows in the result. In that case, sorted and hashed aggregates.</li>
+</ul>
+
+<h2 id="sorted-aggregate">Sorted aggregate</h2>
+
+<ul>
+<li>Sort the data, reads through it, when you see a new value, aggregate the prior group.</li>
+</ul>
+
+<h2 id="hashed-aggregate">Hashed aggregate</h2>
+
+<ul>
+<li>Insert each input row into a hash table based on the gruoping columns. At the end, aggregate all the groups.</li>
+<li>Fast.</li>
+</ul>
+
+<h1 id="statistics">Statistics</h1>
+
+<ul>
+<li>Seq scan vs. index scan vs. bitmap index scan. Nested loop vs. merge join vs. hash join?</li>
+<li>ANALYZE gathers all stats, and decides. With bad statistics, the plans will suck.</li>
+</ul>
+
+<h2 id="confusing-the-planner">Confusing the planner</h2>
+
+<ul>
+<li>Examples of queries where the planner is not able to estimate properly, no matter how good the stats, etc.</li>
+<li>Planner may underestimate row count, choosing index scan over a sequential scan, or nested loop instead of a hash or merge join.</li>
+<li>Planner overestimates row count, so it may choose a seq scan instead of an index scan, or a merge or hash join instead of a nested loop.</li>
+
+<li><p>Small values for LIMIT tilt the planner toward plans that have a fast start and magnify the effect of bad estimates. You can hack this out</p>
+
+<p>SELECT * FROM foo where a= 1 AND b = 1</p></li>
+
+<li><p>Impossible to know the number of rows that will match both of these criteria. The planner is affected by this.</p>
+
+<p>SELECT * FROM foo WHERE (a + 0) = a</p></li>
+
+<li><p>Planner can&rsquo;t know, will assume 0.5% of rows will match.</p></li>
+</ul>
+
+<h2 id="query-planner-params">Query planner params</h2>
+
+<ul>
+<li>seq_page_cost (1.0), random_page_cost (4.0) - reduce these if DB is largely cashed.</li>
+<li>default_statistics_target (100) - Level of detail of stats gathering. Can be overridden on specific columns.</li>
+<li>enable_hashjoin, enable_sort, etc. Useful for testing queries and plans. Don&rsquo;t use these in production. If you must, use SET to disable them for the one session/query.</li>
+<li>work_mem - Amount of memory per sort or hash. Each query can use many sorts or hashes.</li>
+<li>from_collapse_limit, join_collapse_limit, geqo_threshold. Can be reaised, but some queries can blow up when this is increased. Careful.</li>
+</ul>
+
+<h2 id="things-that-are-slow">Things that are slow</h2>
+
+<ul>
+<li>DISTINCT</li>
+<li>Pl/pgsql loops.</li>
+<li>Repeated calls to SQL or PL/pgsql functions. SELECT id, some_function(id) FROM table; &lt;- bad.</li>
+</ul>
+
+<p>[<a href="https://gist.github.com/hgmnz/883144">https://gist.github.com/hgmnz/883144</a>]</p>
+
+</article>
+
+
+
+</div>
+</div>
+<script src="/js/theme.min.js" type="text/javascript"></script>
+
+
+</body>
+</html>
+

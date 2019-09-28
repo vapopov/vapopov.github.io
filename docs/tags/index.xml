@@ -1,131 +1,129 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>Tags on Vadym Popov</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in Tags on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
-    <lastBuildDate>Fri, 21 Jul 2017 07:35:01 +0200</lastBuildDate>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
+    <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bash</title>
-      <link>/tags/bash/</link>
-      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/tags/bash/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Git</title>
+      <title>git</title>
       <link>/tags/git/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Gpg</title>
+      <title>gpg</title>
       <link>/tags/gpg/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/gpg/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>/tags/linux/</link>
-      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nginx</title>
-      <link>/tags/nginx/</link>
-      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/tags/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pg</title>
+      <title>pg</title>
       <link>/tags/pg/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/pg/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Redis</title>
-      <link>/tags/redis/</link>
-      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/tags/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rsync</title>
-      <link>/tags/rsync/</link>
-      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/tags/rsync/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sql</title>
+      <title>sql</title>
       <link>/tags/sql/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/sql/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ssh</title>
+      <title>ssh</title>
       <link>/tags/ssh/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/ssh/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Sysctl</title>
+      <title>bash</title>
+      <link>/tags/bash/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      
+      <guid>/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>/tags/redis/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      
+      <guid>/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rsync</title>
+      <link>/tags/rsync/</link>
+      <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
+      
+      <guid>/tags/rsync/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sysctl</title>
       <link>/tags/sysctl/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/sysctl/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Test</title>
+      <title>test</title>
       <link>/tags/test/</link>
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/test/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Welcome</title>
+      <title>welcome</title>
       <link>/tags/welcome/</link>
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
+      
       <guid>/tags/welcome/</guid>
       <description></description>
     </item>

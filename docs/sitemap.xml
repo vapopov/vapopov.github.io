@@ -3,27 +3,107 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2017/08/12/git-gpg-verification/</loc>
+    <loc>/tags/git/</loc>
     <lastmod>2017-08-12T19:20:06+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/08/12/query-planner/</loc>
+    <loc>/post/2017-08-12-git-gpg-verification/</loc>
     <lastmod>2017-08-12T19:20:06+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/07/21/base-usefull-commands/</loc>
+    <loc>/tags/gpg/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pg/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2017-08-12-query-planner/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sql/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ssh/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2017-03-01-base-usefull-commands/</loc>
     <lastmod>2017-07-21T07:35:01+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/07/21/server-optimisation-for-nginx/</loc>
+    <loc>/tags/bash/</loc>
     <lastmod>2017-07-21T07:35:01+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/07/20/welcome/</loc>
+    <loc>/tags/linux/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nginx/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/redis/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rsync/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2017-06-01-nginx-optimization/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sysctl/</loc>
+    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/test/</loc>
+    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/welcome/</loc>
+    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/welcome/</loc>
     <lastmod>2017-07-20T00:47:34+02:00</lastmod>
   </url>
   
@@ -33,104 +113,7 @@
   </url>
   
   <url>
-    <loc>/tags/bash/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/git/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/gpg/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/linux/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/nginx/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/pg/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/redis/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/rsync/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/sql/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/ssh/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/sysctl/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2017-07-21T07:35:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/test/</loc>
-    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/topics/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/welcome/</loc>
-    <lastmod>2017-07-20T00:47:34+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2017-08-12T19:20:06+02:00</lastmod>
-    <priority>0</priority>
+    <loc>/categories/</loc>
   </url>
   
 </urlset>

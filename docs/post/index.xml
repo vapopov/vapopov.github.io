@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>Posts on Vadym Popov</title>
     <link>/post/</link>
-    <description>Recent content in Posts on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in Posts on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
     <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
@@ -15,28 +13,28 @@
     
     <item>
       <title>Git Gpg Verification</title>
-      <link>/2017/08/12/git-gpg-verification/</link>
+      <link>/post/2017-08-12-git-gpg-verification/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/08/12/git-gpg-verification/</guid>
-      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
+      
+      <guid>/post/2017-08-12-git-gpg-verification/</guid>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K</description>
     </item>
     
     <item>
       <title>Query Planner</title>
-      <link>/2017/08/12/query-planner/</link>
+      <link>/post/2017-08-12-query-planner/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/08/12/query-planner/</guid>
+      
+      <guid>/post/2017-08-12-query-planner/</guid>
       <description>Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&amp;rsquo;t have to go to disk.</description>
     </item>
     
     <item>
       <title>Base usefull commands</title>
-      <link>/2017/07/21/base-usefull-commands/</link>
+      <link>/post/2017-03-01-base-usefull-commands/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/07/21/base-usefull-commands/</guid>
+      
+      <guid>/post/2017-03-01-base-usefull-commands/</guid>
       <description>Docker Mount portworx volume to the empty container
 docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh  Unix Filesystem Remove files that is older than 7 days with specified file mask
 find /data/ -mtime +7 -name &amp;quot;*.gz&amp;quot; -exec rm {} \;  Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
@@ -45,19 +43,19 @@ git push vp origin/master:refs/heads/master Counting objects: 9, done.</descript
     
     <item>
       <title>Server optimisation for nginx</title>
-      <link>/2017/07/21/server-optimisation-for-nginx/</link>
+      <link>/post/2017-06-01-nginx-optimization/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/07/21/server-optimisation-for-nginx/</guid>
+      
+      <guid>/post/2017-06-01-nginx-optimization/</guid>
       <description> Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &amp;quot;10152 65535&amp;quot; &amp;gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240  </description>
     </item>
     
     <item>
       <title>Welcome</title>
-      <link>/2017/07/20/welcome/</link>
+      <link>/post/welcome/</link>
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/07/20/welcome/</guid>
+      
+      <guid>/post/welcome/</guid>
       <description>This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.</description>
     </item>
     

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gpg on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>gpg on Vadym Popov</title>
     <link>/tags/gpg/</link>
-    <description>Recent content in Gpg on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in gpg on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
     <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/tags/gpg/index.xml" rel="self" type="application/rss+xml" />
@@ -15,11 +13,11 @@
     
     <item>
       <title>Git Gpg Verification</title>
-      <link>/2017/08/12/git-gpg-verification/</link>
+      <link>/post/2017-08-12-git-gpg-verification/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/08/12/git-gpg-verification/</guid>
-      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
+      
+      <guid>/post/2017-08-12-git-gpg-verification/</guid>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K</description>
     </item>
     
   </channel>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bash on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>bash on Vadym Popov</title>
     <link>/tags/bash/</link>
-    <description>Recent content in Bash on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in bash on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
     <lastBuildDate>Fri, 21 Jul 2017 07:35:01 +0200</lastBuildDate>
     
 	<atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Base usefull commands</title>
-      <link>/2017/07/21/base-usefull-commands/</link>
+      <link>/post/2017-03-01-base-usefull-commands/</link>
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/07/21/base-usefull-commands/</guid>
+      
+      <guid>/post/2017-03-01-base-usefull-commands/</guid>
       <description>Docker Mount portworx volume to the empty container
 docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh  Unix Filesystem Remove files that is older than 7 days with specified file mask
 find /data/ -mtime +7 -name &amp;quot;*.gz&amp;quot; -exec rm {} \;  Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories

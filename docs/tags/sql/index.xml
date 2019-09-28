@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sql on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>sql on Vadym Popov</title>
     <link>/tags/sql/</link>
-    <description>Recent content in Sql on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in sql on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
     <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
     
 	<atom:link href="/tags/sql/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Query Planner</title>
-      <link>/2017/08/12/query-planner/</link>
+      <link>/post/2017-08-12-query-planner/</link>
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/08/12/query-planner/</guid>
+      
+      <guid>/post/2017-08-12-query-planner/</guid>
       <description>Types of index scans Indexes Sequential Scan:  Read every row in the table No reading of index. Reading from indexes is also expensive. Best way to access small tables, that fits in a single disk block. There is no point in this case to use the index. Block size in pg is 8K. Also the best way to read access all rows in a table.  Index Scan:  Index Scan or Bitmap Index Scan: Read the index, hoping that we won&amp;rsquo;t have to go to disk.</description>
     </item>
     

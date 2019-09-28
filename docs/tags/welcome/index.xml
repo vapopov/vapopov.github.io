@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Welcome on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</title>
+    <title>welcome on Vadym Popov</title>
     <link>/tags/welcome/</link>
-    <description>Recent content in Welcome on ┬──┬﻿ ノ( ゜-゜ノ) (╯°□°）╯︵ ┻━┻</description>
+    <description>Recent content in welcome on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>me@vpopov.org (Vadym Popov)</managingEditor>
-    <webMaster>me@vpopov.org (Vadym Popov)</webMaster>
+    <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
     <lastBuildDate>Thu, 20 Jul 2017 00:47:34 +0200</lastBuildDate>
     
 	<atom:link href="/tags/welcome/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Welcome</title>
-      <link>/2017/07/20/welcome/</link>
+      <link>/post/welcome/</link>
       <pubDate>Thu, 20 Jul 2017 00:47:34 +0200</pubDate>
-      <author>me@vpopov.org (Vadym Popov)</author>
-      <guid>/2017/07/20/welcome/</guid>
+      
+      <guid>/post/welcome/</guid>
       <description>This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.</description>
     </item>
     
