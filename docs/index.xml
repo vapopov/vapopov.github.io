@@ -59,14 +59,5 @@ git push vp origin/master:refs/heads/master Counting objects: 9, done.</descript
       <description>This site is mostly notes, to store useful information. Its easier to find something using browser and have centralized storage and hosting by github.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>/showcase/</link>
-      <pubDate>Mon, 05 Dec 2016 14:41:00 +0100</pubDate>
-      
-      <guid>/showcase/</guid>
-      <description>Showcase Showcase text.</description>
-    </item>
-    
   </channel>
 </rss>
