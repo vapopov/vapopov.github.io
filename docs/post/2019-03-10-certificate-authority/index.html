@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+    <base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="author" content="John Doe">
+
+<meta name="description" content="">
+
+<title>Certificate Authority With Hardware Token [Yubikey]</title>
+<meta name="generator" content="Hugo 0.58.2" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+<link  href="/css/theme.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="page-container container-fluid">
+<div class="col-md-3 menu">
+    <nav class="col-md-3">
+    
+    <h3 class="home-link"><a href="">Root</a></h3>
+    <div id="last-posts" class="open">
+        <h3 data-open="last-posts">Vadym Popov - Most recent posts</h3>
+        <ul>
+            
+            <li><a href="/post/2019-03-10-certificate-authority/">Certificate Authority With Hardware Token [Yubikey]</a></li>
+            
+            <li><a href="/post/2017-08-12-git-gpg-verification/">Git Gpg Verification</a></li>
+            
+            <li><a href="/post/2017-08-12-query-planner/">Query Planner</a></li>
+            
+            <li><a href="/post/2017-03-01-base-usefull-commands/">Base usefull commands</a></li>
+            
+            <li><a href="/post/2017-06-01-nginx-optimization/">Server optimisation for nginx</a></li>
+            
+            <li><a href="/post/welcome/">Welcome</a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+    <div id="tags" class="open">
+        <h3 data-open="tags">Tags</h3>
+        <ul class="tags">
+            
+            <li><a href="/tags/bash">bash</a></li>
+            
+            <li><a href="/tags/certificate">certificate</a></li>
+            
+            <li><a href="/tags/git">git</a></li>
+            
+            <li><a href="/tags/gpg">gpg</a></li>
+            
+            <li><a href="/tags/linux">linux</a></li>
+            
+            <li><a href="/tags/nginx">nginx</a></li>
+            
+            <li><a href="/tags/pg">pg</a></li>
+            
+            <li><a href="/tags/pkcs11">pkcs11</a></li>
+            
+            <li><a href="/tags/redis">redis</a></li>
+            
+            <li><a href="/tags/rsync">rsync</a></li>
+            
+            <li><a href="/tags/sql">sql</a></li>
+            
+            <li><a href="/tags/ssh">ssh</a></li>
+            
+            <li><a href="/tags/sysctl">sysctl</a></li>
+            
+            <li><a href="/tags/test">test</a></li>
+            
+            <li><a href="/tags/welcome">welcome</a></li>
+            
+            <li><a href="/tags/yubikey">yubikey</a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+</nav>
+
+</div>
+<div class="col-md-9 content">
+
+<h1>Certificate Authority With Hardware Token [Yubikey]</h1>
+<h4>Published 10-01-2019 11:58:08</h4>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="kendo5731"></a>
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, 'script', 'twitter-wjs');</script>
+
+<div class="fb-share-button" data-href="/post/2019-03-10-certificate-authority/" data-layout="button"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en-US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<article>
+    
+
+<h2 id="install-dependencies-for-working-with-pkcs11">Install dependencies for working with PKCS11</h2>
+
+<pre><code class="language-bash">brew install yubico-piv-tool openssl@1.1 opensc libp11
+</code></pre>
+
+<h2 id="generating-new-root-ca-certificate">Generating new Root CA certificate</h2>
+
+<p>Definition of Root CA</p>
+
+<p>First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.</p>
+
+<pre><code class="language-bash">openssl genrsa -out root-ca.pem 2048
+</code></pre>
+
+<p>We need to describe certificate definition in openssl configuration file <code>root-ca.config</code>:</p>
+
+<pre><code>[ req ]
+x509_extensions = v3_ca
+distinguished_name = req_distinguished_name
+prompt = no
+[ req_distinguished_name ]
+CN=LetRun Root CA
+[ v3_ca ]
+subjectKeyIdentifier=hash
+basicConstraints=critical,CA:true,pathlen:1
+keyUsage=critical,keyCertSign,cRLSign
+nameConstraints=critical,@nc
+[ nc ]
+permitted;otherName=1.3.6.1.5.5.7.8.7;IA5:let.run
+permitted;email.0=let.run
+permitted;email.1=.let.run
+permitted;DNS=let.run
+permitted;URI.0=let.run
+permitted;URI.1=.let.run
+permitted;IP.0=0.0.0.0/255.255.255.255
+permitted;IP.1=::/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+</code></pre>
+
+<p>Create certificate by using this configruation</p>
+
+<pre><code class="language-bash">echo 01 &gt; root-ca-crt.srl
+openssl req -new -sha256 -x509 -set_serial 1 -days 21900 \
+    -config root-ca.config \
+    -key root-ca.pem \
+    -out root-ca-crt.pem
+</code></pre>
+
+<h2 id="upload-to-yubikey-piv-smart-card">Upload to Yubikey PIV Smart Card</h2>
+
+<p>Now we need to upload our private key and generated certificate to yubikey</p>
+
+<pre><code class="language-bash">yubico-piv-tool -k -a import-key -s 9c &lt; root-ca.pem
+yubico-piv-tool -k -a import-certificate -s 9c &lt; root-ca-crt.pem
+</code></pre>
+
+<h2 id="issue-new-intermediate-certificate-signed-by-root-ca">Issue new Intermediate Certificate signed by Root CA</h2>
+
+<pre><code class="language-bash">openssl genrsa -out ica-hubcli-key.pem 2048
+</code></pre>
+
+<p>Create <code>ica-hubcli-csr.config</code> openssl configuration</p>
+
+<pre><code>[ req ]
+distinguished_name = req_distinguished_name
+prompt = no
+[ req_distinguished_name ]
+CN=hubcli Peach Intermediate CA
+</code></pre>
+
+<p>Generate certificate signature request file (CSR)</p>
+
+<pre><code class="language-bash">openssl req -sha256 -new -config ica-hubcli-csr.config \
+    -key ica-hubcli-key.pem \
+    -nodes \
+    -out ica-hubcli-csr.pem
+</code></pre>
+
+<p>Generate the Intermediate CA certificate with configuration <code>ica-hubcli-crt.config</code>:</p>
+
+<pre><code>basicConstraints = critical, CA:true, pathlen:0
+keyUsage=critical, keyCertSign
+</code></pre>
+
+<p>To find correct slotes and objects in smart card it is better to list all stored objects in smart card:</p>
+
+<pre><code class="language-bash">pkcs11-tool -O
+</code></pre>
+
+<p>Sign intermediate certificate authority by Root CA with private key stored in smart card</p>
+
+<pre><code class="language-bash">echo 00 &gt; ica-hubcli-crt.srl
+/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl &lt;&lt; EOF
+engine dynamic \
+    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
+    -pre ID:pkcs11 \
+    -pre LIST_ADD:1 \
+    -pre LOAD \
+    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
+    -pre VERBOSE
+x509 -sha256 \
+    -engine pkcs11 \
+    -CA root-ca-crt.pem \
+    -CAkeyform engine \
+    -CAkey slot_0-id_2 \
+    -req -days 7300 \
+    -in ica-hubcli-csr.pem \
+    -extfile ica-hubcli-crt.config \
+    -out ica-hubcli-crt.pem
+EOF
+</code></pre>
+
+<h2 id="generate-end-certificate">Generate End Certificate</h2>
+
+<p>Same as pervious steps we need to generate private keys for end certificate first:</p>
+
+<pre><code class="language-bash">openssl genrsa -out end-hubcli-rpc-server-key.pem 2048
+</code></pre>
+
+<p>Create openssl request configuration file, it is important to specify real host name for end certificate (ip adress if needed, etc), example of <code>end-hubcli-rpc-server.config</code>:</p>
+
+<pre><code>[ req ]
+distinguished_name = req_distinguished_name
+prompt = no
+[ req_distinguished_name ]
+CN=hubcli.at.lnd.cloud
+</code></pre>
+
+<p>Create certificate signature request (CSR) for our end certificate:</p>
+
+<pre><code class="language-bash">openssl req -sha256 -new \
+    -config end-hubcli-rpc-server-csr.config \
+    -key end-hubcli-rpc-server-key.pem \
+    -nodes \
+    -out end-hubcli-rpc-server-csr.pem
+</code></pre>
+
+<p>Create signatrue configuration for end certificate:</p>
+
+<pre><code>basicConstraints = critical,CA:false
+keyUsage=critical,digitalSignature,keyEncipherment
+extendedKeyUsage=critical,serverAuth
+subjectAltName=critical,DNS:hubcli.at.lnd.cloud
+</code></pre>
+
+<p>And sign it</p>
+
+<pre><code class="language-bash">openssl x509 -sha256 \
+    -CA ica-hubcli-crt.pem \
+    -CAkey ica-hubcli-key.pem \
+    -req -days 730 \
+    -in end-hubcli-rpc-server-csr.pem \
+    -extfile end-hubcli-rpc-server-crt.config \
+    -out end-hubcli-rpc-server-crt.pem
+</code></pre>
+
+</article>
+
+
+
+</div>
+</div>
+<script src="/js/theme.min.js" type="text/javascript"></script>
+
+
+</body>
+</html>
+

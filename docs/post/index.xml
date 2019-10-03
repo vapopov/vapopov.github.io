@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 11:58:08 +0200</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Certificate Authority With Hardware Token [Yubikey]</title>
+      <link>/post/2019-03-10-certificate-authority/</link>
+      <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
+      
+      <guid>/post/2019-03-10-certificate-authority/</guid>
+      <description>Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11  Generating new Root CA certificate Definition of Root CA
+First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.
+openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition in openssl configuration file root-ca.</description>
+    </item>
     
     <item>
       <title>Git Gpg Verification</title>

@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Vadym Popov</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2008 - 2014, Vadym Popov; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 12 Aug 2017 19:20:06 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 11:58:08 +0200</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>certificate</title>
+      <link>/tags/certificate/</link>
+      <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
+      
+      <guid>/tags/certificate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pkcs11</title>
+      <link>/tags/pkcs11/</link>
+      <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
+      
+      <guid>/tags/pkcs11/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yubikey</title>
+      <link>/tags/yubikey/</link>
+      <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
+      
+      <guid>/tags/yubikey/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>git</title>
