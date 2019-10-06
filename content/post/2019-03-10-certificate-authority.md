@@ -5,6 +5,8 @@ draft: false
 tags: ["yubikey", "certificate", "pkcs11"]
 ---
 
+# OpenSSL Certificate Authority
+
 ## Install dependencies for working with PKCS11
 
 ```bash
@@ -174,4 +176,66 @@ openssl x509 -sha256 \
     -extfile end-hubcli-rpc-server-crt.config \
     -out end-hubcli-rpc-server-crt.pem
 ```
+
+# Vault Certificate Authority
+
+## Integrate Intermediate CA to Hashicorp Vault
+
+Mount new endpoint for intermediate certificate authority and tune configuration.
+
+For each PKI engine that you enable you’ll need to configure the url values for issuing certificate endpoints and CRL distribution points that will be encoded into issued certificates:
+
+```bash
+vault secrets enable -path=pki-hcli pki
+vault secrets tune -max-lease-ttl=26280h pki-hcli
+vault write pki-hcli/config/urls \
+    issuing_certificates="https://vault.lnd.cloud:8200/v1/pki-hcli/ca.pem" \
+    crl_distribution_points="https://vault.lnd.cloud:8200/v1/pki-hcli/crl"
+```
+
+Generate our intermediate ca-certificate for endpoint.
+
+```bash
+vault write pki-hcli/intermediate/generate/internal \
+    common_name="HubCLI Intermediate Authority" \
+    ttl=17520h \
+    key_type=ec \
+    key_bits=256 
+```
+
+Now we need define roles with key usages definitions and allwed domains, first we need to create it for the server
+
+```bash
+vault write pki-hcli/roles/server-role \
+    allowed_domains=at.lnd.cloud,service.consul,localhost \
+    allow_subdomains=true \
+    allow_bare_domains=false \
+    allow_localhost=true \
+    max_ttl=120h \
+    key_type=ec \
+    key_bits=256 \
+    generate_lease=true \
+    key_usage=DigitalSignature,KeyAgreement,KeyEncipherment \
+    ext_key_usage=ExtKeyUsageServerAuth \
+    server_flag=true \
+    client_flag=false
+```
+
+Then we need role for client certificates
+
+```bash
+vault write pki-hcli/roles/client-role \
+    allow_any_name=true \
+    enforce_hostnames=false \
+    max_ttl=120h \
+    key_type=ec \
+    key_bits=256 \
+    generate_lease=true \
+    key_usage=DigitalSignature,KeyAgreement,KeyEncipherment \
+    ext_key_usage=ExtKeyUsageClientAuth \
+    server_flag=false \
+    client_flag=true
+```
+
+
 

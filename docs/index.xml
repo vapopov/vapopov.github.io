@@ -17,7 +17,7 @@
       <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
       
       <guid>/post/2019-03-10-certificate-authority/</guid>
-      <description>Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11  Generating new Root CA certificate Definition of Root CA
+      <description>OpenSSL Certificate Authority Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11  Generating new Root CA certificate Definition of Root CA
 First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.
 openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition in openssl configuration file root-ca.</description>
     </item>
