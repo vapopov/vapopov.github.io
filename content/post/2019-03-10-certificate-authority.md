@@ -203,6 +203,36 @@ vault write pki-hcli/intermediate/generate/internal \
     key_bits=256 
 ```
 
+Sign Intermediate ceritficate with Root CA
+
+```bash
+/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl << EOF
+engine dynamic \
+    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
+    -pre ID:pkcs11 \
+    -pre LIST_ADD:1 \
+    -pre LOAD \
+    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
+    -pre VERBOSE
+x509 -sha256 \
+    -engine pkcs11 \
+    -CA root-ca-crt.pem \
+    -CAkeyform engine \
+    -CAkey slot_0-id_2 \
+    -req -days 730 \
+    -in ica-vault-csr.pem \
+    -extfile ica-hubcli-crt.config \
+    -out ica-vault-crt.pem
+EOF
+```
+
+
+Upload signed certificate to secure storage
+
+```bash
+vault write pki-hcli/intermediate/set-signed certificate=@ica-vault-crt.pem
+```
+
 Now we need define roles with key usages definitions and allwed domains, first we need to create it for the server
 
 ```bash
