@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>git on Vadym Popov</title>
@@ -17,7 +17,7 @@
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
       
       <guid>/post/2017-08-12-git-gpg-verification/</guid>
-      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K</description>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
     </item>
     
     <item>
@@ -26,10 +26,11 @@
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       
       <guid>/post/2017-03-01-base-usefull-commands/</guid>
-      <description>Docker Mount portworx volume to the empty container
-docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh  Unix Filesystem Remove files that is older than 7 days with specified file mask
-find /data/ -mtime +7 -name &amp;quot;*.gz&amp;quot; -exec rm {} \;  Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
-git push vp origin/master:refs/heads/master Counting objects: 9, done.</description>
+      <description>Kubernetes Merging kubeconfig files:
+KUBECONFIG=~/.kube/config:second.cfg kubectl config view --merge --flatten &amp;gt; config Extracting a context from a kubeconfig file:
+KUBECONFIG=~/.kube/config kubectl config view \  --minify --flatten --context=context-1 &amp;gt; config Docker Mount portworx volume to the empty container
+docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh Unix Filesystem Remove files that is older than 7 days with specified file mask
+find /data/ -mtime +7 -name &amp;#34;*.gz&amp;#34; -exec rm {} \; Git base workflow Drop unused branches.</description>
     </item>
     
   </channel>

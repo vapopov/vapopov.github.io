@@ -9,7 +9,7 @@
 <meta name="description" content="">
 
 <title>Base usefull commands</title>
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.68.1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -116,144 +116,100 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <article>
-    
-
-<h2 id="docker">Docker</h2>
-
+    <h2 id="kubernetes">Kubernetes</h2>
+<p>Merging kubeconfig files:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">KUBECONFIG<span style="color:#f92672">=</span>~/.kube/config:second.cfg kubectl config view --merge --flatten &gt; config
+</code></pre></div><p>Extracting a context from a kubeconfig file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">KUBECONFIG<span style="color:#f92672">=</span>~/.kube/config kubectl config view <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --minify --flatten --context<span style="color:#f92672">=</span>context-1 &gt; config
+</code></pre></div><h2 id="docker">Docker</h2>
 <p>Mount portworx volume to the empty container</p>
-
-<pre><code class="language-bash">docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh
-</code></pre>
-
-<h2 id="unix-filesystem">Unix Filesystem</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -it --rm --volume-driver pxd -v name<span style="color:#f92672">=</span>hublndstaging:/data alpine sh
+</code></pre></div><h2 id="unix-filesystem">Unix Filesystem</h2>
 <p>Remove files that is older than 7 days with specified file mask</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find /data/ -mtime +7 -name <span style="color:#e6db74">&#34;*.gz&#34;</span> -exec rm <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span>
+</code></pre></div><h2 id="git-base-workflow">Git base workflow</h2>
+<p>Drop unused branches.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Drop merged branches.</span>
+git branch --merged | egrep -v <span style="color:#e6db74">&#34;(^\*|master|dev)&#34;</span> | xargs git branch -d
 
-<pre><code class="language-bash">find /data/ -mtime +7 -name &quot;*.gz&quot; -exec rm {} \;
-</code></pre>
-
-<h2 id="git-base-workflow">Git base workflow</h2>
-
-<p>Push updatest from one remote repository to another, very helpful in case of work with github forked repositories</p>
-
-<pre><code class="language-bash">git push vp origin/master:refs/heads/master
-Counting objects: 9, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (9/9), done.
-Writing objects: 100% (9/9), 2.88 KiB | 1.44 MiB/s, done.
-Total 9 (delta 6), reused 0 (delta 0)
-remote: Resolving deltas: 100% (6/6), completed with 4 local objects.
+<span style="color:#75715e"># Drop everythin except master and devlop.</span>
+git branch | egrep -v <span style="color:#e6db74">&#34;(^\*|master|develop)&#34;</span> | xargs git branch -D
+</code></pre></div><p>Push updatest from one remote repository to another, very helpful in case of work with github forked repositories</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push vp origin/master:refs/heads/master
+Counting objects: 9, <span style="color:#66d9ef">done</span>.
+Delta compression using up to <span style="color:#ae81ff">4</span> threads.
+Compressing objects: 100% <span style="color:#f92672">(</span>9/9<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+Writing objects: 100% <span style="color:#f92672">(</span>9/9<span style="color:#f92672">)</span>, 2.88 KiB | 1.44 MiB/s, <span style="color:#66d9ef">done</span>.
+Total <span style="color:#ae81ff">9</span> <span style="color:#f92672">(</span>delta 6<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>
+remote: Resolving deltas: 100% <span style="color:#f92672">(</span>6/6<span style="color:#f92672">)</span>, completed with <span style="color:#ae81ff">4</span> local objects.
 To github.com:vapopov/lnd.git
    92eebff6..9b729654  origin/master -&gt; master
-</code></pre>
-
-<p>If you need to update all branches in remote repository</p>
-
-<pre><code class="language-bash">git push rorg refs/remotes/origin/*:refs/heads/*
-Counting objects: 293, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (67/67), done.
-Writing objects: 100% (176/176), 48.32 KiB, done.
-Total 176 (delta 105), reused 168 (delta 97)
-remote: Resolving deltas:  11% (12/105)
+</code></pre></div><p>If you need to update all branches in remote repository</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push rorg refs/remotes/origin/*:refs/heads/*
+Counting objects: 293, <span style="color:#66d9ef">done</span>.
+Delta compression using up to <span style="color:#ae81ff">4</span> threads.
+Compressing objects: 100% <span style="color:#f92672">(</span>67/67<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+Writing objects: 100% <span style="color:#f92672">(</span>176/176<span style="color:#f92672">)</span>, 48.32 KiB, <span style="color:#66d9ef">done</span>.
+Total <span style="color:#ae81ff">176</span> <span style="color:#f92672">(</span>delta 105<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">168</span> <span style="color:#f92672">(</span>delta 97<span style="color:#f92672">)</span>
+remote: Resolving deltas:  11% <span style="color:#f92672">(</span>12/105<span style="color:#f92672">)</span>
 To MY_REPOSITORY_URL
- * [new branch]      korg/gingerbread-&gt; gingerbread
- * [new branch]      korg/gingerbread-release -&gt; gingerbread-release
- * [new branch]      korg/honeycomb-&gt; honeycomb
- * [new branch]      korg/HEAD -&gt; HEAD
- * [new branch]      korg/honeycomb-mr1-release-&gt; honeycomb-mr1-release
- * [new branch]      korg/master -&gt; master
-</code></pre>
-
-<h2 id="redis-multi-actions">Redis multi actions</h2>
-
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/gingerbread-&gt; gingerbread
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/gingerbread-release -&gt; gingerbread-release
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/honeycomb-&gt; honeycomb
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/HEAD -&gt; HEAD
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/honeycomb-mr1-release-&gt; honeycomb-mr1-release
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      korg/master -&gt; master
+</code></pre></div><h2 id="redis-multi-actions">Redis multi actions</h2>
 <p>Remove values by pattern</p>
-
-<pre><code class="language-bash">redis-cli -h dev-1.example.com EVAL &quot;local keys = redis.call('keys', ARGV[1])
-for i=1,#keys,5000 do
-  redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) 
-end 
-return keys&quot; 0 pattern:*
-</code></pre>
-
-<p>Check TTL by pattern</p>
-
-<pre><code class="language-bash">redis-cli -h dev-1.example.com EVAL &quot;
-local ttls = {}
-for i, name in ipairs(redis.call('KEYS', ARGV[1])) do 
-  ttls[i] = {redis.call('ttl', name), name}; 
-end
-return ttls&quot; 0 *pattern*
-</code></pre>
-
-<h2 id="ssh-scp">SSH/SCP</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">redis-cli -h dev-1.example.com EVAL <span style="color:#e6db74">&#34;local keys = redis.call(&#39;keys&#39;, ARGV[1])
+</span><span style="color:#e6db74">for i=1,#keys,5000 do
+</span><span style="color:#e6db74">  redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) 
+</span><span style="color:#e6db74">end 
+</span><span style="color:#e6db74">return keys&#34;</span> <span style="color:#ae81ff">0</span> pattern:*
+</code></pre></div><p>Check TTL by pattern</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">redis-cli -h dev-1.example.com EVAL <span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">local ttls = {}
+</span><span style="color:#e6db74">for i, name in ipairs(redis.call(&#39;KEYS&#39;, ARGV[1])) do 
+</span><span style="color:#e6db74">  ttls[i] = {redis.call(&#39;ttl&#39;, name), name}; 
+</span><span style="color:#e6db74">end
+</span><span style="color:#e6db74">return ttls&#34;</span> <span style="color:#ae81ff">0</span> *pattern*
+</code></pre></div><h2 id="sshscp">SSH/SCP</h2>
 <h3 id="create-backup-from-remote-host-data-docker-volume">Create backup from remote host data docker volume</h3>
-
 <p>Entrypoint should be dropped, because it may contain some execution which could add some data to stdout</p>
-
-<pre><code class="language-bash">ssh user@remote.host &quot;docker-compose -f ~/service/docker-compose.yml run --entrypoint=&quot;&quot; --rm servicename tar -zc /internal/volume&quot; | tar -zx -C ~/where/to/create
-</code></pre>
-
-<h3 id="create-and-transfer-archive-directly-to-the-remote-host">Create and transfer archive directly to the remote host</h3>
-
-<pre><code class="language-bash">$ tar -zc ./path | ssh user@remote.host &quot;cat &gt; ~/file.tar.gz&quot;
-$ tar -zc ./path | ssh user@remote.host &quot;tar -zx -C /destination&quot;
-</code></pre>
-
-<h3 id="transfer-data-with-excluding-files-by-pattern">Transfer data with excluding files by pattern</h3>
-
-<pre><code class="language-bash">rsync -e ssh -azv --exclude 'exclude.py' user@example.com:/var/www/example.com/ /var/www/example.com/
-</code></pre>
-
-<h2 id="rsync">Rsync</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh user@remote.host <span style="color:#e6db74">&#34;docker-compose -f ~/service/docker-compose.yml run --entrypoint=&#34;&#34; --rm servicename tar -zc /internal/volume&#34;</span> | tar -zx -C ~/where/to/create
+</code></pre></div><h3 id="create-and-transfer-archive-directly-to-the-remote-host">Create and transfer archive directly to the remote host</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tar -zc ./path | ssh user@remote.host <span style="color:#e6db74">&#34;cat &gt; ~/file.tar.gz&#34;</span>
+$ tar -zc ./path | ssh user@remote.host <span style="color:#e6db74">&#34;tar -zx -C /destination&#34;</span>
+</code></pre></div><h3 id="transfer-data-with-excluding-files-by-pattern">Transfer data with excluding files by pattern</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -e ssh -azv --exclude <span style="color:#e6db74">&#39;exclude.py&#39;</span> user@example.com:/var/www/example.com/ /var/www/example.com/
+</code></pre></div><h2 id="rsync">Rsync</h2>
 <h3 id="sync-files-and-directory-locally">Sync files and directory locally</h3>
-
-<pre><code class="language-bash">$ rsync -zvh backup.tar /tmp/backups/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rsync -zvh backup.tar /tmp/backups/
 created directory /tmp/backups
 backup.tar
-sent 14.71M bytes  received 31 bytes  3.27M bytes/sec
+sent 14.71M bytes  received <span style="color:#ae81ff">31</span> bytes  3.27M bytes/sec
 total size is 16.18M  speedup is 1.10
-</code></pre>
-
-<p>-z, &ndash;compress          compress file data during the transfer
+</code></pre></div><p>-z, &ndash;compress          compress file data during the transfer
 -v, &ndash;verbose           increase verbosity
 -h, &ndash;human-readable    output numbers in a human-readable format</p>
-
 <h3 id="rsync-over-ssh">Rsync Over SSH</h3>
-
 <p>To specify a protocol with rsync you need to give “-e” option with protocol name you want to use. Here in this example, We will be using “ssh” with “-e” option and perform data transfer.</p>
-
-<pre><code class="language-bash">$ rsync -azv -e ssh fahlo@store-staging.fahlo.me:/var/www/store.fahlo.me /var/www/store.fahlo.me
-</code></pre>
-
-<p>-a, &ndash;archive           archive mode; equals -rlptgoD (no -H,-A,-X), recursive, links, permissions, group, owner, devices
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rsync -azv -e ssh fahlo@store-staging.fahlo.me:/var/www/store.fahlo.me /var/www/store.fahlo.me
+</code></pre></div><p>-a, &ndash;archive           archive mode; equals -rlptgoD (no -H,-A,-X), recursive, links, permissions, group, owner, devices
 -z, &ndash;compress          compress file data during the transfer
 -v, &ndash;verbose           increase verbosity
 -h, &ndash;human-readable    output numbers in a human-readable format</p>
-
 <h3 id="use-of-include-and-exclude-options">Use of –include and –exclude Options</h3>
-
 <p>These two options allows us to include and exclude files by specifying parameters with these option helps us to specify those files or directories which you want to include in your sync and exclude files and folders with you don’t want to be transferred.</p>
-
-<pre><code class="language-bash">$ rsync -avze ssh --include 'R*' --exclude '*' root@192.168.0.101:/var/lib/rpm/ /root/rpm
-</code></pre>
-
-<h3 id="use-of-delete-option">Use of –delete Option</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rsync -avze ssh --include <span style="color:#e6db74">&#39;R*&#39;</span> --exclude <span style="color:#e6db74">&#39;*&#39;</span> root@192.168.0.101:/var/lib/rpm/ /root/rpm
+</code></pre></div><h3 id="use-of-delete-option">Use of –delete Option</h3>
 <p>If a file or directory not exist at the source, but already exists at the destination, you might want to delete that existing file/directory at the target while syncing .</p>
-
 <p>We can use ‘–delete‘ option to delete files that are not there in source directory.</p>
-
-<pre><code class="language-bash">$ rsync -avz --delete root@192.168.0.100:/var/lib/rpm/ .
-</code></pre>
-
-<h3 id="automatically-delete-source-files-after-successful-transfer-with-dry-run">Automatically Delete source Files after successful Transfer (with &ndash;dry-run)</h3>
-
-<pre><code class="language-bash">$ rsync --dry-run --remove-source-files -zvh backup.tar /tmp/backups/
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rsync -avz --delete root@192.168.0.100:/var/lib/rpm/ .
+</code></pre></div><h3 id="automatically-delete-source-files-after-successful-transfer-with---dry-run">Automatically Delete source Files after successful Transfer (with &ndash;dry-run)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rsync --dry-run --remove-source-files -zvh backup.tar /tmp/backups/
+</code></pre></div>
 </article>
 
 

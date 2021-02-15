@@ -5,6 +5,19 @@ draft: false
 tags: ["bash", "rsync", "redis", "git"]
 ---
 
+## Kubernetes
+
+Merging kubeconfig files:
+```bash
+KUBECONFIG=~/.kube/config:second.cfg kubectl config view --merge --flatten > config
+```
+
+Extracting a context from a kubeconfig file:
+```bash
+KUBECONFIG=~/.kube/config kubectl config view \
+    --minify --flatten --context=context-1 > config
+```
+
 ## Docker
 Mount portworx volume to the empty container
 ```bash
@@ -18,6 +31,15 @@ find /data/ -mtime +7 -name "*.gz" -exec rm {} \;
 ```
 
 ## Git base workflow
+
+Drop unused branches.
+```bash
+# Drop merged branches.
+git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+
+# Drop everythin except master and devlop.
+git branch | egrep -v "(^\*|master|develop)" | xargs git branch -D
+```
 
 Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
 ```bash

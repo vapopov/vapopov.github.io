@@ -9,7 +9,7 @@
 <meta name="description" content="">
 
 <title>Git Gpg Verification</title>
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.68.1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -116,125 +116,82 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <article>
-    
-
-<h1 id="gpg-and-git-on-macos">GPG and git on MacOS</h1>
-
+    <h1 id="gpg-and-git-on-macos">GPG and git on MacOS</h1>
 <h2 id="setup">Setup</h2>
-
 <ul>
 <li>Install <a href="https://gpgtools.org">https://gpgtools.org</a></li>
 <li>Create or import a key &ndash; see below for <a href="https://keybase.io">https://keybase.io</a></li>
 <li>Run <code>gpg -K</code> to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign <code>S</code>)</li>
-
-<li><p>Configure <code>git</code> to use GPG &ndash; replace the key with the one from <code>gpg --K</code></p>
-
+<li>Configure <code>git</code> to use GPG &ndash; replace the key with the one from <code>gpg --K</code></li>
+</ul>
 <pre><code>git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
 git config --global user.signingkey E5FEE3B2
 git config --global commit.gpgsign true
-</code></pre></li>
-</ul>
-
-<p>Add this line to <code>~/.gnupg/gpg-agent.conf</code></p>
-
+</code></pre><p>Add this line to <code>~/.gnupg/gpg-agent.conf</code></p>
 <pre><code>pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
-</code></pre>
-
-<p>Add this line to <code>~/.gnupg/gpg.conf</code></p>
-
+</code></pre><p>Add this line to <code>~/.gnupg/gpg.conf</code></p>
 <pre><code>no-tty
-</code></pre>
-
-<h2 id="keybase-io">Keybase.io</h2>
-
+</code></pre><h2 id="keybaseio">Keybase.io</h2>
 <p>Import key to GPG on another host</p>
-
 <pre><code>% keybase pgp export
 % keybase pgp export -q E5FEE3B2 | gpg --import
 % keybase pgp export -q E5FEE3B2 --secret | gpg --allow-secret-key-import --import
-</code></pre>
-
-<p>Add public GPG key to GitHub</p>
-
+</code></pre><p>Add public GPG key to GitHub</p>
 <pre><code>% open https://github.com/settings/keys
 % keybase pgp export -q E5FEE3B2 | pbcopy
-</code></pre>
-
-<h2 id="use-gpg-as-ssh-authentication">Use GPG as SSH authentication</h2>
-
+</code></pre><h2 id="use-gpg-as-ssh-authentication">Use GPG as SSH authentication</h2>
 <p>When I tried to use ssh auth with gpg, version of MacGPG2 was 2.0.30, but at homebrew latest was 2.1.23, there are many issues with old version and at the end attempt to use it not only as integration of encryption out of the box for mail client and services was failed :) In the internet easy to find a lot of articles how to configure it with Yubikey and most of them are related to versions of 2.1, and on my laptop I have them both - probably this is the issue. Also as I understood version 2.0 its so buggy, for example if you have 3 secret sub keys with different capabilities and one was imported, its not possible to import remaining without deleting everything.</p>
-
 <p>So I&rsquo;ve decided to use version form homebrew by default, at least <code>gpg-agent</code> works well</p>
-
 <p>Edit the file ~/.gnupg/gpg-agent.conf to contain the following, in new version <code>write-env-file</code> option is deprecated so we don&rsquo;t put it there:</p>
-
 <pre><code>default-cache-ttl 600
 max-cache-ttl 7200
 pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
 enable-ssh-support
-</code></pre>
-
-<p>Now edit ~/.profile to contain the following:</p>
-
-<pre><code class="language-bash"># Enable GPG keys for SSH Auth
-if [ -f &quot;${HOME}/.gpg-agent-info&quot; ]; then
-     . &quot;${HOME}/.gpg-agent-info&quot;
+</code></pre><p>Now edit ~/.profile to contain the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Enable GPG keys for SSH Auth</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.gpg-agent-info&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+     . <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.gpg-agent-info&#34;</span>
        export GPG_AGENT_INFO
        export SSH_AUTH_SOCK
        export SSH_AGENT_PID
-fi
-GPG_TTY=$(tty)
+<span style="color:#66d9ef">fi</span>
+GPG_TTY<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>tty<span style="color:#66d9ef">)</span>
 export GPG_TTY
-</code></pre>
-
-<p><code>GPG_TTY</code> is needed in case if you don&rsquo;t want to use pinentry program from GPGSuite, and must show password dialog in your current active tty</p>
-
-<pre><code class="language-bash">$ gpg2 -K
+</code></pre></div><p><code>GPG_TTY</code> is needed in case if you don&rsquo;t want to use pinentry program from GPGSuite, and must show password dialog in your current active tty</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gpg2 -K
 /Users/vadym/.gnupg/secring.gpg
 -------------------------------
 sec   4096R/E5FEE3B2 2017-08-11
 uid                  Vadym Popov &lt;me@vpopov.org&gt;
-uid                  [jpeg image of size 22756]
+uid                  <span style="color:#f92672">[</span>jpeg image of size 22756<span style="color:#f92672">]</span>
 ssb   4096R/8A2940A7 2017-08-11
 ssb   4096R/0D8DE79D 2017-08-17
 ssb   4096R/BB84E418 2017-08-17
-</code></pre>
-
-<p>Export the authentication private key and subkey and import to newest version of GnuGPG:</p>
-
-<pre><code class="language-bash">/usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 &gt; private.gpg
-# GnuPG before version 2.1 cannot merge private keys, you have to add ! after to separate
+</code></pre></div><p>Export the authentication private key and subkey and import to newest version of GnuGPG:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/local/MacGPG2/bin/gpg2 --armor --export-secret E5FEE3B2 &gt; private.gpg
+<span style="color:#75715e"># GnuPG before version 2.1 cannot merge private keys, you have to add ! after to separate</span>
 /usr/local/MacGPG2/bin/gpg2 --armor --export-secret-subkeys --export-options export-reset-subkey-passwd BB84E418! 0D8DE79D! &gt; private_sub.asc
 gpg --import private.asc
 gpg --import private_sub.asc
-</code></pre>
-
-<p>So now we need add our subkey with auth capability to sshcontrol file and restart gpg-agent</p>
-
-<pre><code class="language-bash">$ gpg -K --with-keygrip
+</code></pre></div><p>So now we need add our subkey with auth capability to sshcontrol file and restart gpg-agent</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gpg -K --with-keygrip
 /Users/vadym/.gnupg/pubring.kbx
 -------------------------------
-sec   rsa4096 2017-08-11 [SC]
+sec   rsa4096 2017-08-11 <span style="color:#f92672">[</span>SC<span style="color:#f92672">]</span>
       BFA968E385CDB1DA786BCEB7518ABC2FE5FEE3B2
-      Keygrip = 2A76E01E169B09A13F85CD2C755CEBDB46E7A86A
-uid        [ unbekannt ] Vadym Popov &lt;me@vpopov.org&gt;
-uid        [ unbekannt ] [jpeg image of size 22756]
-ssb   rsa4096 2017-08-11 [E]
-      Keygrip = F820B0F81509FBC09AB35E25E3DD02FB432E2D3D
-ssb   rsa4096 2017-08-17 [S]
-      Keygrip = 5ABA3AE4B2D9D3653383B231F56DE540CD38436E
-ssb   rsa4096 2017-08-17 [A]
-      Keygrip = A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C
-</code></pre>
-
-<p>Keygrip of our authentification key <code>A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C</code> must be added to <code>~/.gnugpg/sshcontrol</code>, after this our key should be visible for <code>ssh-add -l</code></p>
-
+      Keygrip <span style="color:#f92672">=</span> 2A76E01E169B09A13F85CD2C755CEBDB46E7A86A
+uid        <span style="color:#f92672">[</span> unbekannt <span style="color:#f92672">]</span> Vadym Popov &lt;me@vpopov.org&gt;
+uid        <span style="color:#f92672">[</span> unbekannt <span style="color:#f92672">]</span> <span style="color:#f92672">[</span>jpeg image of size 22756<span style="color:#f92672">]</span>
+ssb   rsa4096 2017-08-11 <span style="color:#f92672">[</span>E<span style="color:#f92672">]</span>
+      Keygrip <span style="color:#f92672">=</span> F820B0F81509FBC09AB35E25E3DD02FB432E2D3D
+ssb   rsa4096 2017-08-17 <span style="color:#f92672">[</span>S<span style="color:#f92672">]</span>
+      Keygrip <span style="color:#f92672">=</span> 5ABA3AE4B2D9D3653383B231F56DE540CD38436E
+ssb   rsa4096 2017-08-17 <span style="color:#f92672">[</span>A<span style="color:#f92672">]</span>
+      Keygrip <span style="color:#f92672">=</span> A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C
+</code></pre></div><p>Keygrip of our authentification key <code>A46472D1A1C6E67DB78BC7986338CD5B6E5DEE4C</code> must be added to <code>~/.gnugpg/sshcontrol</code>, after this our key should be visible for <code>ssh-add -l</code></p>
 <pre><code>$ ssh-add -l
 4096 SHA256:iV18sELhAtjOXZ+UD4bwdTcC/spSSaFpoQrMEr5lDzk (none) (RSA)
-</code></pre>
-
-<h2 id="links">Links</h2>
-
+</code></pre><h2 id="links">Links</h2>
 <ul>
 <li><a href="https://github.com/pstadler/keybase-gpg-github">https://github.com/pstadler/keybase-gpg-github</a></li>
 <li><a href="https://alexcabal.com/creating-the-perfect-gpg-keypair/">https://alexcabal.com/creating-the-perfect-gpg-keypair/</a></li>

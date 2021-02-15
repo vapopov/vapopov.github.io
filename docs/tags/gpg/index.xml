@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>gpg on Vadym Popov</title>
@@ -17,7 +17,7 @@
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
       
       <guid>/post/2017-08-12-git-gpg-verification/</guid>
-      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K</description>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
     </item>
     
   </channel>

@@ -9,7 +9,7 @@
 <meta name="description" content="">
 
 <title>Certificate Authority With Hardware Token [Yubikey]</title>
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.68.1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -116,26 +116,14 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <article>
-    
-
-<h1 id="openssl-certificate-authority">OpenSSL Certificate Authority</h1>
-
+    <h1 id="openssl-certificate-authority">OpenSSL Certificate Authority</h1>
 <h2 id="install-dependencies-for-working-with-pkcs11">Install dependencies for working with PKCS11</h2>
-
-<pre><code class="language-bash">brew install yubico-piv-tool openssl@1.1 opensc libp11
-</code></pre>
-
-<h2 id="generating-new-root-ca-certificate">Generating new Root CA certificate</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install yubico-piv-tool openssl@1.1 opensc libp11
+</code></pre></div><h2 id="generating-new-root-ca-certificate">Generating new Root CA certificate</h2>
 <p>Definition of Root CA</p>
-
 <p>First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.</p>
-
-<pre><code class="language-bash">openssl genrsa -out root-ca.pem 2048
-</code></pre>
-
-<p>We need to describe certificate definition in openssl configuration file <code>root-ca.config</code>:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl genrsa -out root-ca.pem <span style="color:#ae81ff">2048</span>
+</code></pre></div><p>We need to describe certificate definition in openssl configuration file <code>root-ca.config</code>:</p>
 <pre><code>[ req ]
 x509_extensions = v3_ca
 distinguished_name = req_distinguished_name
@@ -156,208 +144,145 @@ permitted;URI.0=let.run
 permitted;URI.1=.let.run
 permitted;IP.0=0.0.0.0/255.255.255.255
 permitted;IP.1=::/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
-</code></pre>
-
-<p>Create certificate by using this configruation</p>
-
-<pre><code class="language-bash">echo 01 &gt; root-ca-crt.srl
-openssl req -new -sha256 -x509 -set_serial 1 -days 21900 \
-    -config root-ca.config \
-    -key root-ca.pem \
-    -out root-ca-crt.pem
-</code></pre>
-
-<h2 id="upload-to-yubikey-piv-smart-card">Upload to Yubikey PIV Smart Card</h2>
-
+</code></pre><p>Create certificate by using this configruation</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#ae81ff">01</span> &gt; root-ca-crt.srl
+openssl req -new -sha256 -x509 -set_serial <span style="color:#ae81ff">1</span> -days <span style="color:#ae81ff">21900</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -config root-ca.config <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -key root-ca.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -out root-ca-crt.pem
+</code></pre></div><h2 id="upload-to-yubikey-piv-smart-card">Upload to Yubikey PIV Smart Card</h2>
 <p>Now we need to upload our private key and generated certificate to yubikey</p>
-
-<pre><code class="language-bash">yubico-piv-tool -k -a import-key -s 9c &lt; root-ca.pem
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yubico-piv-tool -k -a import-key -s 9c &lt; root-ca.pem
 yubico-piv-tool -k -a import-certificate -s 9c &lt; root-ca-crt.pem
-</code></pre>
-
-<h2 id="issue-new-intermediate-certificate-signed-by-root-ca">Issue new Intermediate Certificate signed by Root CA</h2>
-
-<pre><code class="language-bash">openssl genrsa -out ica-hubcli-key.pem 2048
-</code></pre>
-
-<p>Create <code>ica-hubcli-csr.config</code> openssl configuration</p>
-
+</code></pre></div><h2 id="issue-new-intermediate-certificate-signed-by-root-ca">Issue new Intermediate Certificate signed by Root CA</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl genrsa -out ica-hubcli-key.pem <span style="color:#ae81ff">2048</span>
+</code></pre></div><p>Create <code>ica-hubcli-csr.config</code> openssl configuration</p>
 <pre><code>[ req ]
 distinguished_name = req_distinguished_name
 prompt = no
 [ req_distinguished_name ]
 CN=hubcli Peach Intermediate CA
-</code></pre>
-
-<p>Generate certificate signature request file (CSR)</p>
-
-<pre><code class="language-bash">openssl req -sha256 -new -config ica-hubcli-csr.config \
-    -key ica-hubcli-key.pem \
-    -nodes \
-    -out ica-hubcli-csr.pem
-</code></pre>
-
-<p>Generate the Intermediate CA certificate with configuration <code>ica-hubcli-crt.config</code>:</p>
-
+</code></pre><p>Generate certificate signature request file (CSR)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl req -sha256 -new -config ica-hubcli-csr.config <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -key ica-hubcli-key.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -nodes <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -out ica-hubcli-csr.pem
+</code></pre></div><p>Generate the Intermediate CA certificate with configuration <code>ica-hubcli-crt.config</code>:</p>
 <pre><code>basicConstraints = critical, CA:true, pathlen:0
 keyUsage=critical, keyCertSign
-</code></pre>
-
-<p>To find correct slotes and objects in smart card it is better to list all stored objects in smart card:</p>
-
-<pre><code class="language-bash">pkcs11-tool -O
-</code></pre>
-
-<p>Sign intermediate certificate authority by Root CA with private key stored in smart card</p>
-
-<pre><code class="language-bash">echo 00 &gt; ica-hubcli-crt.srl
-/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl &lt;&lt; EOF
-engine dynamic \
-    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
-    -pre ID:pkcs11 \
-    -pre LIST_ADD:1 \
-    -pre LOAD \
-    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
-    -pre VERBOSE
-x509 -sha256 \
-    -engine pkcs11 \
-    -CA root-ca-crt.pem \
-    -CAkeyform engine \
-    -CAkey slot_0-id_2 \
-    -req -days 7300 \
-    -in ica-hubcli-csr.pem \
-    -extfile ica-hubcli-crt.config \
-    -out ica-hubcli-crt.pem
-EOF
-</code></pre>
-
-<h2 id="generate-end-certificate">Generate End Certificate</h2>
-
+</code></pre><p>To find correct slotes and objects in smart card it is better to list all stored objects in smart card:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pkcs11-tool -O
+</code></pre></div><p>Sign intermediate certificate authority by Root CA with private key stored in smart card</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#ae81ff">00</span> &gt; ica-hubcli-crt.srl
+/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl <span style="color:#e6db74">&lt;&lt; EOF
+</span><span style="color:#e6db74">engine dynamic \
+</span><span style="color:#e6db74">    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
+</span><span style="color:#e6db74">    -pre ID:pkcs11 \
+</span><span style="color:#e6db74">    -pre LIST_ADD:1 \
+</span><span style="color:#e6db74">    -pre LOAD \
+</span><span style="color:#e6db74">    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
+</span><span style="color:#e6db74">    -pre VERBOSE
+</span><span style="color:#e6db74">x509 -sha256 \
+</span><span style="color:#e6db74">    -engine pkcs11 \
+</span><span style="color:#e6db74">    -CA root-ca-crt.pem \
+</span><span style="color:#e6db74">    -CAkeyform engine \
+</span><span style="color:#e6db74">    -CAkey slot_0-id_2 \
+</span><span style="color:#e6db74">    -req -days 7300 \
+</span><span style="color:#e6db74">    -in ica-hubcli-csr.pem \
+</span><span style="color:#e6db74">    -extfile ica-hubcli-crt.config \
+</span><span style="color:#e6db74">    -out ica-hubcli-crt.pem
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><h2 id="generate-end-certificate">Generate End Certificate</h2>
 <p>Same as pervious steps we need to generate private keys for end certificate first:</p>
-
-<pre><code class="language-bash">openssl genrsa -out end-hubcli-rpc-server-key.pem 2048
-</code></pre>
-
-<p>Create openssl request configuration file, it is important to specify real host name for end certificate (ip adress if needed, etc), example of <code>end-hubcli-rpc-server.config</code>:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl genrsa -out end-hubcli-rpc-server-key.pem <span style="color:#ae81ff">2048</span>
+</code></pre></div><p>Create openssl request configuration file, it is important to specify real host name for end certificate (ip adress if needed, etc), example of <code>end-hubcli-rpc-server.config</code>:</p>
 <pre><code>[ req ]
 distinguished_name = req_distinguished_name
 prompt = no
 [ req_distinguished_name ]
 CN=hubcli.at.lnd.cloud
-</code></pre>
-
-<p>Create certificate signature request (CSR) for our end certificate:</p>
-
-<pre><code class="language-bash">openssl req -sha256 -new \
-    -config end-hubcli-rpc-server-csr.config \
-    -key end-hubcli-rpc-server-key.pem \
-    -nodes \
-    -out end-hubcli-rpc-server-csr.pem
-</code></pre>
-
-<p>Create signatrue configuration for end certificate:</p>
-
+</code></pre><p>Create certificate signature request (CSR) for our end certificate:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl req -sha256 -new <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -config end-hubcli-rpc-server-csr.config <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -key end-hubcli-rpc-server-key.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -nodes <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -out end-hubcli-rpc-server-csr.pem
+</code></pre></div><p>Create signatrue configuration for end certificate:</p>
 <pre><code>basicConstraints = critical,CA:false
 keyUsage=critical,digitalSignature,keyEncipherment
 extendedKeyUsage=critical,serverAuth
 subjectAltName=critical,DNS:hubcli.at.lnd.cloud
-</code></pre>
-
-<p>And sign it</p>
-
-<pre><code class="language-bash">openssl x509 -sha256 \
-    -CA ica-hubcli-crt.pem \
-    -CAkey ica-hubcli-key.pem \
-    -req -days 730 \
-    -in end-hubcli-rpc-server-csr.pem \
-    -extfile end-hubcli-rpc-server-crt.config \
-    -out end-hubcli-rpc-server-crt.pem
-</code></pre>
-
-<h1 id="vault-certificate-authority">Vault Certificate Authority</h1>
-
+</code></pre><p>And sign it</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl x509 -sha256 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -CA ica-hubcli-crt.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -CAkey ica-hubcli-key.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -req -days <span style="color:#ae81ff">730</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -in end-hubcli-rpc-server-csr.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -extfile end-hubcli-rpc-server-crt.config <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -out end-hubcli-rpc-server-crt.pem
+</code></pre></div><h1 id="vault-certificate-authority">Vault Certificate Authority</h1>
 <h2 id="integrate-intermediate-ca-to-hashicorp-vault">Integrate Intermediate CA to Hashicorp Vault</h2>
-
 <p>Mount new endpoint for intermediate certificate authority and tune configuration.</p>
-
 <p>For each PKI engine that you enable you’ll need to configure the url values for issuing certificate endpoints and CRL distribution points that will be encoded into issued certificates:</p>
-
-<pre><code class="language-bash">vault secrets enable -path=pki-hcli pki
-vault secrets tune -max-lease-ttl=26280h pki-hcli
-vault write pki-hcli/config/urls \
-    issuing_certificates=&quot;https://vault.lnd.cloud:8200/v1/pki-hcli/ca.pem&quot; \
-    crl_distribution_points=&quot;https://vault.lnd.cloud:8200/v1/pki-hcli/crl&quot;
-</code></pre>
-
-<p>Generate our intermediate ca-certificate for endpoint.</p>
-
-<pre><code class="language-bash">vault write pki-hcli/intermediate/generate/internal \
-    common_name=&quot;HubCLI Intermediate Authority&quot; \
-    ttl=17520h \
-    key_type=ec \
-    key_bits=256 
-</code></pre>
-
-<p>Sign Intermediate ceritficate with Root CA</p>
-
-<pre><code class="language-bash">/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl &lt;&lt; EOF
-engine dynamic \
-    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
-    -pre ID:pkcs11 \
-    -pre LIST_ADD:1 \
-    -pre LOAD \
-    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
-    -pre VERBOSE
-x509 -sha256 \
-    -engine pkcs11 \
-    -CA root-ca-crt.pem \
-    -CAkeyform engine \
-    -CAkey slot_0-id_2 \
-    -req -days 730 \
-    -in ica-vault-csr.pem \
-    -extfile ica-hubcli-crt.config \
-    -out ica-vault-crt.pem
-EOF
-</code></pre>
-
-<p>Upload signed certificate to secure storage</p>
-
-<pre><code class="language-bash">vault write pki-hcli/intermediate/set-signed certificate=@ica-vault-crt.pem
-</code></pre>
-
-<p>Now we need define roles with key usages definitions and allwed domains, first we need to create it for the server</p>
-
-<pre><code class="language-bash">vault write pki-hcli/roles/server-role \
-    allowed_domains=at.lnd.cloud,service.consul,localhost \
-    allow_subdomains=true \
-    allow_bare_domains=false \
-    allow_localhost=true \
-    max_ttl=120h \
-    key_type=ec \
-    key_bits=256 \
-    generate_lease=true \
-    key_usage=DigitalSignature,KeyAgreement,KeyEncipherment \
-    ext_key_usage=ExtKeyUsageServerAuth \
-    server_flag=true \
-    client_flag=false
-</code></pre>
-
-<p>Then we need role for client certificates</p>
-
-<pre><code class="language-bash">vault write pki-hcli/roles/client-role \
-    allow_any_name=true \
-    enforce_hostnames=false \
-    max_ttl=120h \
-    key_type=ec \
-    key_bits=256 \
-    generate_lease=true \
-    key_usage=DigitalSignature,KeyAgreement,KeyEncipherment \
-    ext_key_usage=ExtKeyUsageClientAuth \
-    server_flag=false \
-    client_flag=true
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vault secrets enable -path<span style="color:#f92672">=</span>pki-hcli pki
+vault secrets tune -max-lease-ttl<span style="color:#f92672">=</span>26280h pki-hcli
+vault write pki-hcli/config/urls <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    issuing_certificates<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://vault.lnd.cloud:8200/v1/pki-hcli/ca.pem&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    crl_distribution_points<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://vault.lnd.cloud:8200/v1/pki-hcli/crl&#34;</span>
+</code></pre></div><p>Generate our intermediate ca-certificate for endpoint.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vault write pki-hcli/intermediate/generate/internal <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    common_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HubCLI Intermediate Authority&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    ttl<span style="color:#f92672">=</span>17520h <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_type<span style="color:#f92672">=</span>ec <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_bits<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span> 
+</code></pre></div><p>Sign Intermediate ceritficate with Root CA</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/local/Cellar/openssl@1.1/1.1.1d/bin/openssl <span style="color:#e6db74">&lt;&lt; EOF
+</span><span style="color:#e6db74">engine dynamic \
+</span><span style="color:#e6db74">    -pre SO_PATH:/usr/local/Cellar/libp11/0.4.10/lib/engines-1.1/pkcs11.dylib \
+</span><span style="color:#e6db74">    -pre ID:pkcs11 \
+</span><span style="color:#e6db74">    -pre LIST_ADD:1 \
+</span><span style="color:#e6db74">    -pre LOAD \
+</span><span style="color:#e6db74">    -pre MODULE_PATH:/usr/local/Cellar/opensc/0.19.0_1/lib/opensc-pkcs11.so \
+</span><span style="color:#e6db74">    -pre VERBOSE
+</span><span style="color:#e6db74">x509 -sha256 \
+</span><span style="color:#e6db74">    -engine pkcs11 \
+</span><span style="color:#e6db74">    -CA root-ca-crt.pem \
+</span><span style="color:#e6db74">    -CAkeyform engine \
+</span><span style="color:#e6db74">    -CAkey slot_0-id_2 \
+</span><span style="color:#e6db74">    -req -days 730 \
+</span><span style="color:#e6db74">    -in ica-vault-csr.pem \
+</span><span style="color:#e6db74">    -extfile ica-hubcli-crt.config \
+</span><span style="color:#e6db74">    -out ica-vault-crt.pem
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Upload signed certificate to secure storage</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vault write pki-hcli/intermediate/set-signed certificate<span style="color:#f92672">=</span>@ica-vault-crt.pem
+</code></pre></div><p>Now we need define roles with key usages definitions and allwed domains, first we need to create it for the server</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vault write pki-hcli/roles/server-role <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    allowed_domains<span style="color:#f92672">=</span>at.lnd.cloud,service.consul,localhost <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    allow_subdomains<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    allow_bare_domains<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    allow_localhost<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    max_ttl<span style="color:#f92672">=</span>120h <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_type<span style="color:#f92672">=</span>ec <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_bits<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    generate_lease<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_usage<span style="color:#f92672">=</span>DigitalSignature,KeyAgreement,KeyEncipherment <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    ext_key_usage<span style="color:#f92672">=</span>ExtKeyUsageServerAuth <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    server_flag<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    client_flag<span style="color:#f92672">=</span>false
+</code></pre></div><p>Then we need role for client certificates</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vault write pki-hcli/roles/client-role <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    allow_any_name<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    enforce_hostnames<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    max_ttl<span style="color:#f92672">=</span>120h <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_type<span style="color:#f92672">=</span>ec <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_bits<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    generate_lease<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    key_usage<span style="color:#f92672">=</span>DigitalSignature,KeyAgreement,KeyEncipherment <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    ext_key_usage<span style="color:#f92672">=</span>ExtKeyUsageClientAuth <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    server_flag<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    client_flag<span style="color:#f92672">=</span>true
+</code></pre></div>
 </article>
 
 

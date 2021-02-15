@@ -9,7 +9,7 @@
 <meta name="description" content="">
 
 <title>yubikey</title>
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.68.1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
@@ -96,9 +96,9 @@
     
     <article>
         <h3><a href="/post/2019-03-10-certificate-authority/">Certificate Authority With Hardware Token [Yubikey]</a> - 2019-10-01 11:58:08</h3>
-        OpenSSL Certificate Authority Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11  Generating new Root CA certificate Definition of Root CA
+        OpenSSL Certificate Authority Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11 Generating new Root CA certificate Definition of Root CA
 First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.
-openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition in openssl configuration file root-ca.
+openssl genrsa -out root-ca.pem 2048 We need to describe certificate definition in openssl configuration file root-ca.
     </article>
     
 </div>

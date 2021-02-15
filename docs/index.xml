@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vadym Popov</title>
@@ -17,9 +17,9 @@
       <pubDate>Tue, 01 Oct 2019 11:58:08 +0200</pubDate>
       
       <guid>/post/2019-03-10-certificate-authority/</guid>
-      <description>OpenSSL Certificate Authority Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11  Generating new Root CA certificate Definition of Root CA
+      <description>OpenSSL Certificate Authority Install dependencies for working with PKCS11 brew install yubico-piv-tool openssl@1.1 opensc libp11 Generating new Root CA certificate Definition of Root CA
 First of all we need to generate private key to be used to generate public key for our new certificate. In current example used 2048 bits of rsa, this is related to limitation of specific hardware token.
-openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition in openssl configuration file root-ca.</description>
+openssl genrsa -out root-ca.pem 2048 We need to describe certificate definition in openssl configuration file root-ca.</description>
     </item>
     
     <item>
@@ -28,7 +28,7 @@ openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition
       <pubDate>Sat, 12 Aug 2017 19:20:06 +0200</pubDate>
       
       <guid>/post/2017-08-12-git-gpg-verification/</guid>
-      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K</description>
+      <description>GPG and git on MacOS Setup  Install https://gpgtools.org Create or import a key &amp;ndash; see below for https://keybase.io Run gpg -K to see all private keys in current machine, use the key ID for the next step (each gpg key has subkeys with different capabilities, its better to choose subkey with sign S) Configure git to use GPG &amp;ndash; replace the key with the one from gpg --K  git config --global gpg.</description>
     </item>
     
     <item>
@@ -46,10 +46,11 @@ openssl genrsa -out root-ca.pem 2048  We need to describe certificate definition
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       
       <guid>/post/2017-03-01-base-usefull-commands/</guid>
-      <description>Docker Mount portworx volume to the empty container
-docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh  Unix Filesystem Remove files that is older than 7 days with specified file mask
-find /data/ -mtime +7 -name &amp;quot;*.gz&amp;quot; -exec rm {} \;  Git base workflow Push updatest from one remote repository to another, very helpful in case of work with github forked repositories
-git push vp origin/master:refs/heads/master Counting objects: 9, done.</description>
+      <description>Kubernetes Merging kubeconfig files:
+KUBECONFIG=~/.kube/config:second.cfg kubectl config view --merge --flatten &amp;gt; config Extracting a context from a kubeconfig file:
+KUBECONFIG=~/.kube/config kubectl config view \  --minify --flatten --context=context-1 &amp;gt; config Docker Mount portworx volume to the empty container
+docker run -it --rm --volume-driver pxd -v name=hublndstaging:/data alpine sh Unix Filesystem Remove files that is older than 7 days with specified file mask
+find /data/ -mtime +7 -name &amp;#34;*.gz&amp;#34; -exec rm {} \; Git base workflow Drop unused branches.</description>
     </item>
     
     <item>
@@ -58,7 +59,7 @@ git push vp origin/master:refs/heads/master Counting objects: 9, done.</descript
       <pubDate>Fri, 21 Jul 2017 07:35:01 +0200</pubDate>
       
       <guid>/post/2017-06-01-nginx-optimization/</guid>
-      <description> Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1  Bash resource initialisation echo &amp;quot;10152 65535&amp;quot; &amp;gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240  </description>
+      <description>Optimisation to use nginx node Use the full range of ports. net.ipv4.ip_local_port_range = 1024 65535 net.ipv4.tcp_max_syn_backlog=4096 net.core.netdev_max_backlog=4096 net.core.somaxconn=1024 net.ipv4.tcp_keepalive_time=300 net.core.somaxconn=250000 net.ipv4.tcp_max_syn_backlog=2500 net.core.netdev_max_backlog=2500 net.ipv4.tcp_tw_reuse = 1 Bash resource initialisation echo &amp;#34;10152 65535&amp;#34; &amp;gt; /proc/sys/net/ipv4/ip_local_port_range sysctl -w fs.file-max=128000 sysctl -w net.ipv4.tcp_keepalive_time=300 sysctl -w net.core.somaxconn=250000 sysctl -w net.ipv4.tcp_max_syn_backlog=2500 sysctl -w net.core.netdev_max_backlog=2500 ulimit -n 10240 </description>
     </item>
     
     <item>
